@@ -1,0 +1,82 @@
+@import "tailwindcss";
+
+:root {
+  --cream: #f3ede3;
+  --cream-soft: #fbf7f1;
+  --cream-deep: #ebe4d9;
+  --sage: #5a6e61;
+  --sage-deep: #435247;
+  --ink: #141715;
+  --ink-muted: #4c534d;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  color: var(--ink);
+  background:
+    radial-gradient(circle at top left, rgba(90, 110, 97, 0.07), transparent 24%),
+    linear-gradient(180deg, #f8f4ec 0%, var(--cream) 100%);
+  font-family: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Palatino,
+    "Times New Roman", serif;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+::selection {
+  background: rgba(90, 110, 97, 0.18);
+}
+
+@layer components {
+  .section-label {
+    @apply text-[11px] uppercase tracking-[0.3em] text-[var(--sage)];
+  }
+
+  .section-title {
+    @apply max-w-[13ch] text-[clamp(2.4rem,5vw,4.8rem)] leading-[0.95] tracking-[-0.05em] text-[var(--ink)];
+  }
+
+  .section-copy {
+    @apply max-w-xl text-[15px] leading-8 text-[var(--ink-muted)] sm:text-base;
+  }
+
+  .detail-card {
+    @apply rounded-[1.5rem] border border-[rgba(36,46,39,0.1)] bg-[rgba(251,247,241,0.56)] p-5;
+  }
+
+  .detail-label {
+    @apply text-[11px] uppercase tracking-[0.28em] text-[var(--sage)];
+  }
+
+  .detail-copy {
+    @apply mt-3 text-sm leading-7 text-[var(--ink-muted)];
+  }
+
+  .brand-stat {
+    @apply rounded-[1.4rem] border border-[rgba(36,46,39,0.1)] bg-[rgba(251,247,241,0.56)] p-5;
+  }
+
+  .brand-stat span {
+    @apply text-[11px] uppercase tracking-[0.28em] text-[var(--sage)];
+  }
+
+  .brand-stat p {
+    @apply mt-4 text-sm leading-7 text-[var(--ink-muted)];
+  }
+}
