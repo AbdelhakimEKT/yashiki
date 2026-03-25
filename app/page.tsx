@@ -7,7 +7,7 @@ import SiteBrand from "@/components/site-brand";
 import SiteNav from "@/components/site-nav";
 import ambiance from "@/imagee/ambiance.png";
 import hero from "@/imagee/hero.png";
-import logoMain from "@/imagee/logo-main.png";
+import laMaisonStock from "@/imagee/la-maison-stock.jpg";
 import logoSecondary from "@/imagee/logo-secondary.png";
 import ramen from "@/imagee/ramen-image.png";
 import sushi from "@/imagee/sushi-image.png";
@@ -35,7 +35,7 @@ const contacts = [
 
 const moments = [
   "Lumière basse, bois clair, service attentif sans ostentation.",
-  "Une carte courte, construite autour du bouillon, du riz et de l'arrivage.",
+  "Une carte courte, construite autour du bouillon, du riz et de l’arrivage.",
   "Le soir, la salle prend un rythme calme, presque feutré.",
 ];
 
@@ -49,13 +49,13 @@ export default function Home() {
       <section className="relative flex min-h-screen items-end overflow-hidden">
         <Image
           src={hero}
-          alt="Salle et cuisine du restaurant Yashiki"
+          alt="Illustration principale du restaurant Yashiki"
           fill
           priority
           className="object-cover object-center"
           sizes="100vw"
         />
-        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(17,22,18,0.22)_0%,rgba(17,22,18,0.42)_55%,rgba(17,22,18,0.68)_100%)]" />
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(17,22,18,0.2)_0%,rgba(17,22,18,0.4)_55%,rgba(17,22,18,0.66)_100%)]" />
 
         <header className="absolute inset-x-0 top-0 z-20">
           <div className="mx-auto flex w-[min(100%-32px,1280px)] items-center justify-between py-6 text-[11px] uppercase tracking-[0.28em] text-[rgba(246,241,232,0.86)] sm:w-[min(100%-48px,1280px)]">
@@ -74,14 +74,14 @@ export default function Home() {
                 YASHIKI
               </h1>
               <p className="mt-6 max-w-[34rem] text-base leading-8 text-[rgba(246,241,232,0.82)] sm:text-lg">
-                Restaurant japonais contemporain a Paris. Chez Yashiki, les
-                bouillons cuisent longtemps, le riz est travaille avec mesure,
-                et chaque service cherche la nettete plutot que l&apos;effet.
+                Restaurant japonais contemporain à Paris. Chez Yashiki, les
+                bouillons cuisent longuement, le riz est travaillé avec mesure
+                et chaque service cherche la netteté plutôt que l’effet.
               </p>
               <div className="mt-10 flex flex-col gap-3 sm:flex-row">
                 <a
                   href="#contact"
-                  className="inline-flex items-center justify-center rounded-full bg-[var(--sage)] px-7 py-3 text-xs uppercase tracking-[0.24em] text-[var(--cream)] transition duration-300 hover:bg-[var(--sage-deep)]"
+                  className="inline-flex items-center justify-center rounded-full bg-[var(--sage-deep)] px-7 py-3 text-xs uppercase tracking-[0.24em] !text-white transition duration-300 hover:bg-[var(--ink)] hover:!text-white"
                 >
                   Réserver une table
                 </a>
@@ -99,8 +99,8 @@ export default function Home() {
                 Le soir chez Yashiki
               </p>
               <p className="mt-3 max-w-[18rem] text-sm leading-7 text-[rgba(246,241,232,0.82)]">
-                Une cuisine de contrastes discrets: bouillons profonds, coupes
-                franches, assaisonnements tenus et salle volontairement apaisee.
+                Une cuisine de contrastes discrets : bouillons profonds, coupes
+                franches, assaisonnements tenus et salle volontairement apaisée.
               </p>
             </div>
           </Reveal>
@@ -118,9 +118,8 @@ export default function Home() {
               Une salle pensée comme une respiration.
             </h2>
             <p className="section-copy mt-6">
-              Bois clair, murs mats, tables espacees. La salle est pensee pour
-              accompagner le repas sans jamais prendre le dessus sur
-              l&apos;assiette.
+              Bois clair, murs mats, tables espacées. La salle est pensée pour
+              accompagner le repas sans jamais prendre le dessus sur l’assiette.
             </p>
             <div className="mt-10 space-y-4 border-l border-[rgba(36,46,39,0.12)] pl-6">
               {moments.map((item) => (
@@ -139,18 +138,18 @@ export default function Home() {
           <div className="relative overflow-hidden rounded-[2rem]">
             <Image
               src={ambiance}
-              alt="Ambiance intérieure du restaurant Yashiki"
+              alt="Illustration secondaire de l’univers Yashiki"
               className="aspect-[4/3] w-full object-cover"
               sizes="(min-width: 1024px) 60vw, 100vw"
             />
             <div className="pointer-events-none absolute inset-0 border border-[rgba(17,22,18,0.08)]" />
             <div className="absolute bottom-5 left-5 max-w-[15rem] rounded-[1.5rem] border border-[rgba(246,241,232,0.28)] bg-[rgba(17,22,18,0.28)] px-4 py-4 backdrop-blur-md">
               <p className="text-[10px] uppercase tracking-[0.28em] text-[rgba(246,241,232,0.62)]">
-                Salle
+                Ambiance
               </p>
               <p className="mt-3 text-sm leading-7 text-[rgba(246,241,232,0.84)]">
-                Comptoir feutre, lumiere douce et service continue tout au long
-                de la soiree.
+                Une identité calme, lumineuse et cohérente du premier regard
+                jusqu’à la table.
               </p>
             </div>
           </div>
@@ -169,26 +168,26 @@ export default function Home() {
                 Des ramen construits sur la patience du bouillon.
               </h2>
               <p className="section-copy mt-6">
-                Porc, volaille ou version vegetale, chaque bol cherche
-                l&apos;equilibre entre profondeur, tenue du gras et allonge en
+                Porc, volaille ou version végétale, chaque bol cherche
+                l’équilibre entre profondeur, tenue du gras et allonge en
                 bouche.
               </p>
               <div className="mt-10 grid gap-4 sm:grid-cols-2">
                 <div className="detail-card">
                   <p className="detail-label">Tonkotsu clair</p>
                   <p className="detail-copy">
-                    Bouillon monte sur les os, poitrine confite, oeuf marine.
+                    Bouillon monté sur les os, poitrine confite, œuf mariné.
                   </p>
                 </div>
                 <div className="detail-card">
                   <p className="detail-label">Shoyu fumé</p>
                   <p className="detail-copy">
-                    Volaille rotie, tare brun, huile aromatique et cebette.
+                    Volaille rôtie, tare brun, huile aromatique et cébette.
                   </p>
                 </div>
               </div>
               <div className="mt-8 flex items-center gap-6 text-[11px] uppercase tracking-[0.26em] text-[var(--ink-muted)]">
-                <span>Preparation quotidienne</span>
+                <span>Préparation quotidienne</span>
                 <span className="h-px w-12 bg-[rgba(36,46,39,0.16)]" />
                 <span>Bouillon long</span>
               </div>
@@ -234,23 +233,23 @@ export default function Home() {
             <div className="ml-auto max-w-xl">
               <p className="section-label">Sushi</p>
               <h2 className="section-title mt-4">
-                Sushi, sashimi et nigiri servis selon l&apos;arrivage.
+                Sushi, sashimi et nigiri servis selon l’arrivage.
               </h2>
               <p className="section-copy mt-6">
-                Riz tiede, assaisonnement mesure, poisson taille au moment du
+                Riz tiède, assaisonnement mesuré, poisson taillé au moment du
                 service. Une lecture simple du produit, sans surcharge.
               </p>
               <div className="mt-10 grid gap-6 border-l border-[rgba(36,46,39,0.14)] pl-6">
                 <div>
                   <p className="detail-label">Nigiri du jour</p>
                   <p className="detail-copy">
-                    Selection du marche, montage minute, wasabi dose a la main.
+                    Sélection du marché, montage minute, wasabi dosé à la main.
                   </p>
                 </div>
                 <div>
                   <p className="detail-label">Maki signature</p>
                   <p className="detail-copy">
-                    Roule minute, texture nette, assaisonnement discret.
+                    Roulé minute, texture nette, assaisonnement discret.
                   </p>
                 </div>
               </div>
@@ -263,11 +262,11 @@ export default function Home() {
         <div className="pointer-events-none absolute inset-x-0 top-0 h-full bg-[linear-gradient(90deg,rgba(90,110,97,0.04)_0%,transparent_22%,transparent_78%,rgba(90,110,97,0.04)_100%)]" />
         <div className="mx-auto w-[min(100%-32px,1280px)] py-20 sm:w-[min(100%-48px,1280px)] lg:py-24">
           <Reveal className="max-w-2xl">
-            <p className="section-label">Sides</p>
+            <p className="section-label">À partager</p>
             <h2 className="section-title mt-4">Des accompagnements utiles.</h2>
             <p className="section-copy mt-6">
-              Quelques assiettes pour commencer, accompagner ou partager a
-              table. Des preparations courtes, faites pour rester justes.
+              Quelques assiettes pour commencer, accompagner ou partager à
+              table. Des préparations courtes, faites pour rester justes.
             </p>
           </Reveal>
 
@@ -295,49 +294,72 @@ export default function Home() {
         id="brand"
         className="mx-auto w-[min(100%-32px,1280px)] py-24 sm:w-[min(100%-48px,1280px)] lg:py-32"
       >
-        <div className="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+        <div className="grid gap-12 lg:grid-cols-[0.82fr_1.18fr] lg:items-start">
           <Reveal>
-            <div className="relative flex min-h-[420px] items-center justify-center overflow-hidden rounded-[2.25rem] border border-[rgba(36,46,39,0.12)] bg-[linear-gradient(180deg,rgba(142,158,145,0.14)_0%,rgba(246,241,232,0.9)_100%)] p-10">
-              <div className="absolute left-[10%] top-[14%] h-28 w-28 rounded-full border border-[rgba(89,108,95,0.2)]" />
-              <div className="absolute bottom-[14%] right-[12%] h-36 w-36 rounded-full border border-[rgba(89,108,95,0.18)]" />
-              <div className="absolute inset-y-[18%] left-1/2 w-px -translate-x-1/2 bg-[rgba(89,108,95,0.12)]" />
+            <div className="relative overflow-hidden rounded-[2.35rem] border border-[rgba(36,46,39,0.12)] bg-[rgba(250,244,236,0.48)] shadow-[0_28px_80px_rgba(44,32,24,0.08)]">
               <Image
-                src={logoMain}
-                alt="Logo principal Yashiki"
-                className="relative z-10 w-[min(62%,320px)] object-contain"
+                src={laMaisonStock}
+                alt="Intérieur chaleureux d’un restaurant japonais contemporain"
+                className="h-[32rem] w-full object-cover object-[26%_center] lg:h-[42rem]"
+                sizes="(min-width: 1024px) 36vw, 100vw"
               />
+              <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(18,21,18,0.04)_0%,rgba(18,21,18,0.18)_42%,rgba(18,21,18,0.54)_100%)]" />
+              <div className="absolute left-6 top-6 rounded-full border border-[rgba(246,241,232,0.26)] bg-[rgba(18,21,18,0.2)] px-4 py-2 text-[10px] uppercase tracking-[0.28em] text-[rgba(246,241,232,0.9)] backdrop-blur-md">
+                La maison
+              </div>
+              <div className="absolute bottom-6 left-6 max-w-[16rem] rounded-[1.55rem] border border-[rgba(246,241,232,0.18)] bg-[rgba(18,21,18,0.22)] px-5 py-5 backdrop-blur-xl">
+                <p className="text-[10px] uppercase tracking-[0.28em] text-[rgba(246,241,232,0.62)]">
+                  Ambiance du soir
+                </p>
+                <p className="mt-3 text-sm leading-7 text-[rgba(246,241,232,0.86)]">
+                  Bois chaud, comptoir vivant, lumière tenue et gestes visibles
+                  dès le premier regard.
+                </p>
+              </div>
             </div>
           </Reveal>
 
           <Reveal delay="100">
-            <div className="max-w-2xl">
+            <div className="max-w-[44rem] pt-2">
               <p className="section-label">La maison</p>
-              <h2 className="section-title mt-4">
-                Une maison japonaise contemporaine, ancree dans le service du
+              <h2 className="mt-4 max-w-[9ch] text-[clamp(3.1rem,5.6vw,6.1rem)] leading-[0.9] tracking-[-0.065em] text-[var(--ink)]">
+                Une maison japonaise contemporaine, ancrée dans le service du
                 soir.
               </h2>
-              <p className="section-copy mt-6">
-                Yashiki reunit un travail de bouillon, de cuisson precise et
-                de produits choisis selon la saison. La carte reste volontairement
-                concise pour garder une execution reguliere.
+              <p className="mt-8 max-w-[40rem] text-[17px] leading-9 text-[var(--ink-muted)]">
+                Yashiki réunit un travail de bouillon, de cuisson précise et de
+                produits choisis selon la saison. La carte reste volontairement
+                concise pour garder une exécution régulière.
               </p>
-              <p className="section-copy mt-6">
-                A table, le geste reste lisible: riz, dashi, tare, grillades,
-                friture legere, coupe minute. Une cuisine pensee pour revenir
-                souvent plutot que pour impressionner une seule fois.
+              <p className="mt-6 max-w-[40rem] text-[17px] leading-9 text-[var(--ink-muted)]">
+                À table, le geste reste lisible : riz, dashi, tare, grillades,
+                friture légère, coupe minute. Une cuisine pensée pour revenir
+                souvent plutôt que pour impressionner une seule fois.
               </p>
-              <div className="mt-10 grid gap-4 sm:grid-cols-3">
-                <div className="brand-stat">
-                  <span>01</span>
-                  <p>Bouillons montes chaque jour.</p>
+              <div className="mt-12 grid gap-4 sm:grid-cols-3">
+                <div className="rounded-[1.55rem] border border-[rgba(36,46,39,0.1)] bg-[rgba(250,244,236,0.82)] p-5 shadow-[0_14px_34px_rgba(44,32,24,0.05)]">
+                  <span className="text-[11px] uppercase tracking-[0.28em] text-[var(--sage)]">
+                    01
+                  </span>
+                  <p className="mt-4 text-[15px] leading-8 text-[var(--ink-muted)]">
+                    Bouillons montés chaque jour.
+                  </p>
                 </div>
-                <div className="brand-stat">
-                  <span>02</span>
-                  <p>Arrivages selon la saison et la coupe.</p>
+                <div className="rounded-[1.55rem] border border-[rgba(36,46,39,0.1)] bg-[rgba(250,244,236,0.82)] p-5 shadow-[0_14px_34px_rgba(44,32,24,0.05)]">
+                  <span className="text-[11px] uppercase tracking-[0.28em] text-[var(--sage)]">
+                    02
+                  </span>
+                  <p className="mt-4 text-[15px] leading-8 text-[var(--ink-muted)]">
+                    Arrivages selon la saison et la coupe.
+                  </p>
                 </div>
-                <div className="brand-stat">
-                  <span>03</span>
-                  <p>Salle calme, service continu, rythme du soir.</p>
+                <div className="rounded-[1.55rem] border border-[rgba(36,46,39,0.1)] bg-[rgba(250,244,236,0.82)] p-5 shadow-[0_14px_34px_rgba(44,32,24,0.05)]">
+                  <span className="text-[11px] uppercase tracking-[0.28em] text-[var(--sage)]">
+                    03
+                  </span>
+                  <p className="mt-4 text-[15px] leading-8 text-[var(--ink-muted)]">
+                    Salle calme, service continu, rythme du soir.
+                  </p>
                 </div>
               </div>
             </div>
@@ -351,12 +373,12 @@ export default function Home() {
             <div className="max-w-xl">
               <p className="section-label">Contact</p>
               <h2 className="section-title mt-4">
-                Reservations et informations.
+                Réservations et informations.
               </h2>
               <p className="section-copy mt-6">
-                Reservations conseillees chaque soir. Pour les groupes, les
-                horaires et les demandes particulieres, l&apos;equipe repond par
-                telephone ou par email.
+                Réservations conseillées chaque soir. Pour les groupes, les
+                horaires et les demandes particulières, l’équipe répond par
+                téléphone ou par email.
               </p>
             </div>
           </Reveal>
@@ -375,14 +397,27 @@ export default function Home() {
                 <div>
                   <p className="detail-label">Réservation</p>
                   <div className="mt-4 space-y-3 text-sm leading-7 text-[var(--ink-muted)]">
-                    <p>+33 1 80 00 12 24</p>
-                    <p>reservation@yashiki.fr</p>
+                    <p>
+                      <a
+                        href="tel:+33180001224"
+                        className="text-[var(--ink-muted)] transition hover:text-[var(--ink)]"
+                      >
+                        +33 1 80 00 12 24
+                      </a>
+                    </p>
+                    <p>
+                      <a
+                        href="mailto:reservation@yashiki.fr"
+                        className="text-[var(--ink-muted)] transition hover:text-[var(--ink)]"
+                      >
+                        reservation@yashiki.fr
+                      </a>
+                    </p>
                     <p>Groupes et privatisations sur demande</p>
                   </div>
                   <a
                     href="mailto:reservation@yashiki.fr"
-                    className="mt-8 inline-flex items-center justify-center rounded-full bg-[var(--ink)] px-6 py-3 text-xs uppercase tracking-[0.24em] !text-[var(--cream-soft)] transition duration-300 hover:bg-[var(--sage-deep)] hover:!text-[var(--cream-soft)]"
-                    style={{ color: "var(--cream-soft)" }}
+                    className="mt-8 inline-flex items-center justify-center rounded-full bg-[var(--sage-deep)] px-6 py-3 text-xs uppercase tracking-[0.24em] !text-white transition duration-300 hover:bg-[var(--ink)] hover:!text-white"
                   >
                     Écrire au restaurant
                   </a>

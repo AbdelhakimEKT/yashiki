@@ -6,10 +6,7 @@ import SiteNav from "@/components/site-nav";
 import { menu } from "@/data/menu";
 
 function toSectionId(value: string) {
-  return value
-    .toLowerCase()
-    .replaceAll("&", "and")
-    .replaceAll(" ", "-");
+  return value.toLowerCase().replaceAll("&", "and").replaceAll(" ", "-");
 }
 
 export default function MenuPage() {
@@ -44,14 +41,14 @@ export default function MenuPage() {
 
               <div className="grid gap-8 lg:grid-cols-[1fr_auto] lg:items-end">
                 <p className="max-w-2xl text-[15px] leading-8 text-[var(--ink-muted)] sm:text-base">
-                  Entrees a partager, ramen, sushi, plats du soir, desserts et
-                  boissons. La selection peut evoluer selon l&apos;arrivage, la
+                  Entrées à partager, ramen, sushi, plats du soir, desserts et
+                  boissons. La sélection peut évoluer selon l’arrivage, la
                   saison et le rythme du service.
                 </p>
 
                 <Link
                   href="/#contact"
-                  className="inline-flex items-center justify-center rounded-full border border-[rgba(36,46,39,0.14)] bg-[rgba(251,247,241,0.78)] px-6 py-3 text-xs uppercase tracking-[0.24em] text-[var(--ink)] transition duration-300 hover:border-[rgba(90,110,97,0.34)] hover:bg-white"
+                  className="inline-flex items-center justify-center rounded-full bg-[var(--sage-deep)] px-6 py-3 text-xs uppercase tracking-[0.24em] !text-white transition duration-300 hover:bg-[var(--ink)] hover:!text-white"
                 >
                   Réserver
                 </Link>
@@ -78,7 +75,7 @@ export default function MenuPage() {
         </Reveal>
       </section>
 
-      <section className="mx-auto w-[min(100%-32px,1360px)] space-y-8 pb-18 sm:w-[min(100%-48px,1360px)] lg:space-y-10 lg:pb-24">
+      <section className="mx-auto w-[min(100%-32px,1360px)] space-y-8 pb-20 sm:w-[min(100%-48px,1360px)] lg:space-y-10 lg:pb-24">
         {menu.map((section, index) => (
           <Reveal key={section.title} delay={`${index * 70}`}>
             <section
@@ -109,8 +106,8 @@ export default function MenuPage() {
                           Service
                         </p>
                         <p className="mt-4 text-sm leading-7 text-[var(--ink-muted)]">
-                          Certains plats changent selon les produits recus.
-                          N&apos;hesitez pas a demander les suggestions du soir.
+                          Certains plats changent selon les produits reçus.
+                          N’hésite pas à demander les suggestions du soir.
                         </p>
                       </div>
 
