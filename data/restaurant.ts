@@ -50,9 +50,9 @@ export const restaurant = {
     },
   ],
   guestHighlights: [
-    "Service posé",
-    "Cuisine régulière",
-    "Adresse où l’on revient",
+    "Salle calme",
+    "Comptoir visible",
+    "Bouillons nets",
   ],
   reservationSteps: [
     {

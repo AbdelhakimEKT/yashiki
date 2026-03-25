@@ -37,21 +37,6 @@ const topSelections = [
   },
 ];
 
-const houseSignals = [
-  {
-    title: "Le soir",
-    copy: "Une salle calme, une lumière tenue et un rythme pensé pour laisser la table respirer.",
-  },
-  {
-    title: "Le comptoir",
-    copy: "Huit places pour voir sortir les bols, les coupes minute et les assiettes du service.",
-  },
-  {
-    title: "La carte",
-    copy: "Ramen, sushi et assiettes du soir dans une lecture courte, nette et facile à choisir.",
-  },
-];
-
 export default function Home() {
   return (
     <main className="relative overflow-hidden bg-[var(--cream)] text-[var(--ink)]">
@@ -160,28 +145,11 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="border-y border-[rgba(36,46,39,0.08)] bg-[rgba(250,244,236,0.68)]">
-        <div className="mx-auto grid w-[min(100%-32px,1280px)] gap-px py-10 sm:w-[min(100%-48px,1280px)] md:grid-cols-3">
-          {houseSignals.map((signal) => (
-            <Reveal key={signal.title}>
-              <article className="h-full rounded-[1.6rem] border border-[rgba(36,46,39,0.08)] bg-[var(--cream-soft)] px-6 py-6">
-                <p className="text-[11px] uppercase tracking-[0.3em] text-[var(--sage)]">
-                  {signal.title}
-                </p>
-                <p className="mt-4 text-[15px] leading-8 text-[var(--ink-muted)]">
-                  {signal.copy}
-                </p>
-              </article>
-            </Reveal>
-          ))}
-        </div>
-      </section>
-
       <section className="mx-auto w-[min(100%-32px,1280px)] py-24 sm:w-[min(100%-48px,1280px)] lg:py-28">
         <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
           <Reveal className="max-w-3xl">
             <p className="section-label">Signatures</p>
-            <h2 className="section-title mt-4">
+            <h2 className="mt-4 max-w-[12ch] text-[clamp(2.6rem,5.4vw,5.6rem)] leading-[0.92] tracking-[-0.06em] text-[var(--ink)]">
               Deux raisons très simples de réserver chez Yashiki.
             </h2>
             <p className="section-copy mt-6">

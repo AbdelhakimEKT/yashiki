@@ -50,7 +50,7 @@ a {
   }
 
   .section-title {
-    @apply max-w-[13ch] text-[clamp(2.4rem,5vw,4.8rem)] leading-[0.95] tracking-[-0.05em] text-[var(--ink)];
+    @apply text-[clamp(2.4rem,5vw,4.8rem)] leading-[0.95] tracking-[-0.05em] text-[var(--ink)];
   }
 
   .section-copy {

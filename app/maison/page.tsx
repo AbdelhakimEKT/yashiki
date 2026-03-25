@@ -10,6 +10,7 @@ import maisonBarStock from "@/imagee/maison-bar-stock.jpg";
 import maisonChefMakingStock from "@/imagee/maison-chef-making-stock.jpg";
 import maisonChefStock from "@/imagee/maison-chef-stock.jpg";
 import maisonDiningStock from "@/imagee/maison-dining-stock.jpg";
+import maisonMapStatic from "@/imagee/maison-map.svg";
 import laMaisonStock from "@/imagee/la-maison-stock.jpg";
 import { restaurant } from "@/data/restaurant";
 
@@ -328,99 +329,39 @@ export default function MaisonPage() {
                 <p className="text-[11px] uppercase tracking-[0.3em] text-[var(--sage)]">
                   Google Maps
                 </p>
-                <h2 className="mt-3 text-[clamp(2.3rem,4vw,4rem)] leading-[0.95] tracking-[-0.05em] text-[var(--ink)]">
+                <h2 className="mt-3 max-w-[10ch] text-[clamp(2.3rem,4vw,4rem)] leading-[0.95] tracking-[-0.05em] text-[var(--ink)]">
                   Trouver la maison en un regard.
                 </h2>
                 <p className="mt-5 max-w-xl text-sm leading-7 text-[var(--ink-muted)]">
-                  Adresse claire, quartier identifiable et accès direct depuis
-                  la carte. Le bloc reste lisible immédiatement, puis la carte
-                  prend le relais pour situer précisément la maison.
+                  L’adresse, la carte et la réservation restent au même
+                  endroit, sans détour inutile.
                 </p>
               </div>
 
-              <div className="grid gap-4 sm:grid-cols-3">
-                <article className="rounded-[1.6rem] border border-[rgba(36,46,39,0.08)] bg-[rgba(251,247,241,0.82)] p-5">
-                  <p className="text-[11px] uppercase tracking-[0.26em] text-[var(--sage)]">
-                    Quartier
-                  </p>
-                  <p className="mt-4 text-sm leading-7 text-[var(--ink-muted)]">
-                    {restaurant.neighborhood}
-                  </p>
-                </article>
-
-                <article className="rounded-[1.6rem] border border-[rgba(36,46,39,0.08)] bg-[rgba(251,247,241,0.82)] p-5">
-                  <p className="text-[11px] uppercase tracking-[0.26em] text-[var(--sage)]">
-                    Adresse
-                  </p>
-                  <p className="mt-4 text-sm leading-7 text-[var(--ink-muted)]">
-                    {restaurant.addressLine}
-                  </p>
-                </article>
-
-                <article className="rounded-[1.6rem] border border-[rgba(36,46,39,0.08)] bg-[rgba(251,247,241,0.82)] p-5">
-                  <p className="text-[11px] uppercase tracking-[0.26em] text-[var(--sage)]">
-                    Réserver
-                  </p>
-                  <p className="mt-4 text-sm leading-7 text-[var(--ink-muted)]">
-                    {restaurant.phoneDisplay}
-                  </p>
-                </article>
-              </div>
-
-              <div className="overflow-hidden rounded-[2.3rem] border border-[rgba(36,46,39,0.1)] bg-[linear-gradient(180deg,rgba(100,118,104,0.12)_0%,rgba(251,247,241,0.92)_100%)] p-7">
-                <div className="grid gap-6 lg:grid-cols-[0.92fr_1.08fr] lg:items-end">
-                  <div>
-                    <p className="text-[11px] uppercase tracking-[0.28em] text-[var(--sage)]">
-                      Adresse complète
-                    </p>
-                    <p className="mt-4 text-[clamp(2rem,3vw,3rem)] leading-[0.95] tracking-[-0.04em] text-[var(--ink)]">
-                      {restaurant.addressLine}
-                    </p>
-                    <p className="mt-5 text-sm leading-7 text-[var(--ink-muted)]">
-                      Entre les rues du Marais et le rythme du soir, la maison
-                      reste facile à situer, à appeler et à retrouver quand on
-                      veut réserver sans chercher.
-                    </p>
-                  </div>
-
-                  <div className="rounded-[1.8rem] border border-[rgba(36,46,39,0.08)] bg-[rgba(255,255,255,0.56)] p-5">
-                    <p className="text-[11px] uppercase tracking-[0.26em] text-[var(--sage)]">
-                      Repères utiles
-                    </p>
-                    <div className="mt-4 grid gap-3 text-sm leading-7 text-[var(--ink-muted)]">
-                      <p>Marais / Hôtel de Ville</p>
-                      <p>{restaurant.phoneDisplay}</p>
-                      <p>{restaurant.email}</p>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="mt-6 flex flex-wrap gap-2">
-                  {restaurant.openingHours.map((slot) => (
-                    <span
-                      key={slot.days}
-                      className="rounded-full border border-[rgba(36,46,39,0.1)] bg-[rgba(245,238,228,0.78)] px-3 py-2 text-[10px] uppercase tracking-[0.22em] text-[var(--sage-deep)]"
+              <div className="overflow-hidden rounded-[2.3rem] border border-[rgba(36,46,39,0.1)] bg-[rgba(251,247,241,0.82)]">
+                <Image
+                  src={maisonMapStatic}
+                  alt="Carte de localisation de Yashiki dans le Marais"
+                  className="h-[470px] w-full object-cover"
+                  sizes="(min-width: 1024px) 52vw, 100vw"
+                />
+                <div className="border-t border-[rgba(36,46,39,0.08)] p-6">
+                  <div className="flex flex-col gap-3 sm:flex-row">
+                    <a
+                      href={restaurant.googleMapsHref}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex items-center justify-center rounded-full bg-[var(--sage-deep)] px-6 py-3 text-xs uppercase tracking-[0.24em] !text-white transition duration-300 hover:bg-[var(--ink)] hover:!text-white"
                     >
-                      {slot.days} · {slot.hours}
-                    </span>
-                  ))}
-                </div>
-
-                <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-                  <a
-                    href={restaurant.googleMapsHref}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="inline-flex items-center justify-center rounded-full bg-[var(--sage-deep)] px-6 py-3 text-xs uppercase tracking-[0.24em] !text-white transition duration-300 hover:bg-[var(--ink)] hover:!text-white"
-                  >
-                    Ouvrir Google Maps
-                  </a>
-                  <a
-                    href={restaurant.phoneHref}
-                    className="inline-flex items-center justify-center rounded-full border border-[rgba(36,46,39,0.12)] px-6 py-3 text-xs uppercase tracking-[0.24em] text-[var(--ink)] transition duration-300 hover:border-[rgba(90,110,97,0.34)] hover:bg-white"
-                  >
-                    Appeler le restaurant
-                  </a>
+                      Ouvrir Google Maps
+                    </a>
+                    <a
+                      href={restaurant.phoneHref}
+                      className="inline-flex items-center justify-center rounded-full border border-[rgba(36,46,39,0.12)] px-6 py-3 text-xs uppercase tracking-[0.24em] text-[var(--ink)] transition duration-300 hover:border-[rgba(90,110,97,0.34)] hover:bg-white"
+                    >
+                      {restaurant.phoneDisplay}
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>
@@ -459,50 +400,19 @@ export default function MaisonPage() {
                 </p>
                 <div className="mt-6 grid gap-3">
                   {mockGoogleReviews.map((review) => (
-                    <div
+                    <details
                       key={review.name}
-                      className="rounded-[1.4rem] border border-[rgba(36,46,39,0.08)] bg-[rgba(245,238,228,0.68)] p-4"
+                      className="rounded-[1.4rem] border border-[rgba(36,46,39,0.08)] bg-[rgba(245,238,228,0.68)] px-4 py-4"
                     >
-                      <p className="text-[11px] uppercase tracking-[0.24em] text-[var(--sage)]">
+                      <summary className="cursor-pointer list-none text-[11px] uppercase tracking-[0.24em] text-[var(--sage)]">
                         {review.name}
-                      </p>
+                      </summary>
                       <p className="mt-3 text-sm leading-7 text-[var(--ink-muted)]">
                         {review.quote}
                       </p>
-                    </div>
+                    </details>
                   ))}
                 </div>
-              </article>
-
-              <article className="rounded-[2rem] border border-[rgba(36,46,39,0.08)] bg-[rgba(251,247,241,0.82)] p-7">
-                <p className="text-[11px] uppercase tracking-[0.28em] text-[var(--sage)]">
-                  Adresse & accès
-                </p>
-                <p className="mt-4 text-2xl leading-[1.15] tracking-[-0.03em] text-[var(--ink)]">
-                  {restaurant.addressLine}
-                </p>
-                <p className="mt-4 text-sm leading-7 text-[var(--ink-muted)]">
-                  {restaurant.neighborhood}. Le lieu est prêt à être trouvé vite,
-                  autant depuis la carte que depuis la réservation.
-                </p>
-                <div className="mt-6 flex flex-wrap gap-2">
-                  {restaurant.openingHours.map((slot) => (
-                    <span
-                      key={slot.days}
-                      className="rounded-full border border-[rgba(36,46,39,0.1)] bg-[rgba(245,238,228,0.74)] px-3 py-2 text-[10px] uppercase tracking-[0.22em] text-[var(--sage-deep)]"
-                    >
-                      {slot.days}
-                    </span>
-                  ))}
-                </div>
-                <a
-                  href={restaurant.googleMapsHref}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="mt-6 inline-flex items-center justify-center rounded-full bg-[var(--sage-deep)] px-6 py-3 text-xs uppercase tracking-[0.24em] !text-white transition duration-300 hover:bg-[var(--ink)] hover:!text-white"
-                >
-                  Ouvrir dans Google Maps
-                </a>
               </article>
 
               <article className="rounded-[2rem] border border-[rgba(36,46,39,0.08)] bg-[rgba(251,247,241,0.82)] p-7">

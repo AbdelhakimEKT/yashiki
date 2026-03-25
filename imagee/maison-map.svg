@@ -1,0 +1,26 @@
+<svg width="1200" height="760" viewBox="0 0 1200 760" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="760" rx="40" fill="#F6EFE4"/>
+  <rect x="36" y="36" width="1128" height="688" rx="28" fill="#FBF6EF" stroke="#DDD2C2" stroke-width="2"/>
+  <path d="M120 164H1080" stroke="#D8C9B2" stroke-width="18" stroke-linecap="round"/>
+  <path d="M144 562H1058" stroke="#D8C9B2" stroke-width="16" stroke-linecap="round"/>
+  <path d="M252 96V664" stroke="#E4D8C7" stroke-width="12" stroke-linecap="round"/>
+  <path d="M580 96V664" stroke="#E4D8C7" stroke-width="12" stroke-linecap="round"/>
+  <path d="M884 96V664" stroke="#E4D8C7" stroke-width="12" stroke-linecap="round"/>
+  <path d="M120 352H1080" stroke="#E4D8C7" stroke-width="12" stroke-linecap="round"/>
+  <path d="M724 164C724 237.902 664.902 297 591 297C517.098 297 458 237.902 458 164C458 90.0984 517.098 31 591 31C664.902 31 724 90.0984 724 164Z" fill="#4A5A4D" transform="translate(10 178)"/>
+  <circle cx="601" cy="342" r="38" fill="#FBF6EF"/>
+  <path d="M612 505C612 505 684 412.228 684 342C684 282.294 635.706 234 576 234C516.294 234 468 282.294 468 342C468 412.228 540 505 540 505H612Z" fill="#4A5A4D"/>
+  <circle cx="576" cy="342" r="34" fill="#FBF6EF"/>
+  <rect x="714" y="258" width="308" height="174" rx="24" fill="#FAF4EC" stroke="#DDD2C2" stroke-width="2"/>
+  <text x="750" y="316" fill="#647668" font-family="Georgia, 'Times New Roman', serif" font-size="22" letter-spacing="5">YASHIKI</text>
+  <text x="750" y="366" fill="#141715" font-family="Georgia, 'Times New Roman', serif" font-size="42">16 rue des Archives</text>
+  <text x="750" y="408" fill="#514B43" font-family="Georgia, 'Times New Roman', serif" font-size="28">75004 Paris</text>
+  <rect x="152" y="458" width="248" height="116" rx="22" fill="#FAF4EC" stroke="#DDD2C2" stroke-width="2"/>
+  <text x="186" y="506" fill="#647668" font-family="Georgia, 'Times New Roman', serif" font-size="18" letter-spacing="4">MARAIS</text>
+  <text x="186" y="550" fill="#141715" font-family="Georgia, 'Times New Roman', serif" font-size="34">Hôtel de Ville</text>
+  <rect x="714" y="480" width="252" height="94" rx="22" fill="#4A5A4D"/>
+  <text x="764" y="536" fill="#FFFFFF" font-family="Georgia, 'Times New Roman', serif" font-size="28">Google Maps</text>
+  <circle cx="1010" cy="527" r="30" fill="#FAF4EC"/>
+  <path d="M996 527H1024" stroke="#4A5A4D" stroke-width="4" stroke-linecap="round"/>
+  <path d="M1010 513V541" stroke="#4A5A4D" stroke-width="4" stroke-linecap="round"/>
+</svg>
