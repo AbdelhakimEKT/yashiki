@@ -4,20 +4,22 @@ import SiteNav from "@/components/site-nav";
 type SiteHeaderProps = {
   light?: boolean;
   overlay?: boolean;
+  hideBrandLogo?: boolean;
 };
 
 export default function SiteHeader({
   light = false,
   overlay = false,
+  hideBrandLogo = false,
 }: SiteHeaderProps) {
   const shell = overlay
-    ? "absolute inset-x-0 top-0 z-30 bg-[linear-gradient(180deg,rgba(10,12,10,0.3)_0%,rgba(10,12,10,0)_100%)]"
-    : "sticky top-0 z-40 border-b border-[rgba(36,46,39,0.08)] bg-[rgba(251,247,241,0.84)] backdrop-blur-xl";
+    ? "absolute inset-x-0 top-0 z-40 bg-[linear-gradient(180deg,rgba(20,15,13,0.62)_0%,rgba(20,15,13,0)_100%)]"
+    : "sticky top-0 z-50 border-b border-[var(--line)] bg-[rgba(248,241,232,0.78)] backdrop-blur-2xl";
 
   return (
     <header className={shell}>
-      <div className="mx-auto flex w-[min(100%-32px,1280px)] items-center justify-between py-5 sm:w-[min(100%-48px,1280px)]">
-        <SiteBrand light={light} />
+      <div className="page-shell flex items-center justify-between py-5">
+        <SiteBrand light={light} hideLogo={hideBrandLogo} />
         <SiteNav light={light} />
       </div>
     </header>

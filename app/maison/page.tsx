@@ -3,144 +3,121 @@ import Image from "next/image";
 import Link from "next/link";
 
 import MobileBookingBar from "@/components/mobile-booking-bar";
+import OpenStatus from "@/components/open-status";
 import Reveal from "@/components/reveal";
 import SiteFooter from "@/components/site-footer";
 import SiteHeader from "@/components/site-header";
+import laMaisonStock from "@/imagee/la-maison-stock.jpg";
 import maisonBarStock from "@/imagee/maison-bar-stock.jpg";
 import maisonChefMakingStock from "@/imagee/maison-chef-making-stock.jpg";
-import maisonChefStock from "@/imagee/maison-chef-stock.jpg";
-import maisonDiningStock from "@/imagee/maison-dining-stock.jpg";
-import maisonMapStatic from "@/imagee/maison-map.svg";
-import laMaisonStock from "@/imagee/la-maison-stock.jpg";
+import maisonCounterStock from "@/imagee/maison-counter-stock.jpg";
+import pexelsJapaneseInterior from "@/imagee/pexels-japanese-interior.jpg";
+import pexelsLanternChef from "@/imagee/pexels-lantern-chef.jpg";
 import { restaurant } from "@/data/restaurant";
 
 export const metadata: Metadata = {
   title: "La maison",
   description:
-    "Découvre la salle, le comptoir, les cuisiniers et l’accès à la maison Yashiki à Paris.",
+    "Découvre l’univers de Yashiki: la salle, le comptoir, l’équipe et la philosophie qui relie le site au restaurant.",
 };
 
-const atmosphereNotes = [
+const spaceNotes = [
   {
-    title: "Salle apaisée",
-    copy: "Une lumière tenue, des tables bien espacées et une ambiance pensée pour faire exister le repas.",
+    title: "Salle feutrée",
+    copy:
+      "Le calme vient des matières, de la lumière et des distances. Rien n’écrase la table.",
   },
   {
     title: "Comptoir vivant",
-    copy: "Huit places seulement pour suivre le service, les bols, les coupes et les assiettes qui partent.",
+    copy:
+      "Huit places pour voir partir les bols, les coupes minute et les derniers gestes de dressage.",
   },
   {
-    title: "Cuisine lisible",
-    copy: "Bouillons montés, sauces tenues, riz travaillé avec précision et carte volontairement concise.",
-  },
-];
-
-const serviceMarkers = [
-  {
-    label: "Salle tenue",
-    copy: "Des tables espacées, une lumière calme et un rythme qui laisse la soirée s’installer.",
-  },
-  {
-    label: "Comptoir visible",
-    copy: "Le geste reste lisible pour ceux qui aiment voir partir les assiettes et les bols.",
-  },
-  {
-    label: "Cuisine régulière",
-    copy: "Même ligne de précision du premier service jusqu’aux dernières commandes du soir.",
-  },
-];
-
-const kitchenNotes = [
-  {
-    label: "Bouillons",
-    copy: "Montés chaque jour pour garder de la densité sans lourdeur inutile.",
-  },
-  {
-    label: "Coupe minute",
-    copy: "Le comptoir garde une vraie tension de service, visible et précise.",
-  },
-  {
-    label: "Équipe",
-    copy: "Une brigade courte, pensée pour tenir la régularité plus que l’esbroufe.",
-  },
-];
-
-const mockGoogleReviews = [
-  {
-    name: "Camille R.",
-    quote:
-      "Adresse calme, service très net et vrai plaisir sur le comptoir. On sent une maison sérieuse derrière l’assiette.",
-  },
-  {
-    name: "Nathan B.",
-    quote:
-      "Bouillon précis, coupe minute visible, salle apaisée. Le genre d’endroit où l’on revient sans hésiter.",
+    title: "Rythme clair",
+    copy:
+      "Le parcours digital et le service réel suivent la même logique: peu de friction, beaucoup d’assurance.",
   },
 ];
 
 export default function MaisonPage() {
   return (
-    <main className="min-h-screen bg-[var(--cream)] text-[var(--ink)]">
-      <SiteHeader />
+    <main id="main-content" className="min-h-screen bg-[var(--paper-soft)] text-[var(--ink)]">
+      <section
+        className="relative isolate min-h-[92svh] overflow-hidden bg-[var(--night)]"
+        style={{ color: "rgb(248, 241, 232)" }}
+      >
+        <Image
+          src={laMaisonStock}
+          alt="Intérieur chaleureux et boisé du restaurant Yashiki"
+          fill
+          priority
+          unoptimized
+          className="object-cover object-[36%_center] opacity-[0.5]"
+          sizes="100vw"
+        />
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(20,15,13,0.88)_0%,rgba(20,15,13,0.7)_44%,rgba(20,15,13,0.54)_100%)]" />
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(20,15,13,0.34)_0%,rgba(20,15,13,0.16)_35%,rgba(20,15,13,0.88)_100%)]" />
+        <SiteHeader light overlay hideBrandLogo />
 
-      <section className="mx-auto grid w-[min(100%-32px,1280px)] gap-10 py-12 sm:w-[min(100%-48px,1280px)] lg:grid-cols-[0.92fr_1.08fr] lg:items-center lg:py-20">
-        <Reveal>
-          <div className="max-w-2xl">
-            <p className="section-label">La maison</p>
-            <h1 className="mt-4 max-w-[12ch] text-[clamp(3.2rem,6vw,6.4rem)] leading-[0.9] tracking-[-0.06em] text-[var(--ink)]">
-              Une maison japonaise contemporaine, ancrée dans le service du soir.
+        <div className="page-shell relative z-10 grid min-h-[92svh] gap-10 pb-12 pt-28 lg:grid-cols-[0.66fr_0.34fr] lg:items-end">
+          <Reveal>
+            <p className="eyebrow !text-[rgba(248,241,232,0.68)]">La maison</p>
+            <h1 className="display-hero mt-5 max-w-[10ch] text-[var(--paper-soft)]">
+              L’ambiance n’est pas un décor. C’est une promesse tenue.
             </h1>
-            <p className="mt-8 max-w-[40rem] text-[17px] leading-9 text-[var(--ink-muted)]">
-              Bois chaud, comptoir vivant, lumière tenue et service précis:
-              Yashiki a été pensé comme une adresse où l’on revient pour la
-              cuisine autant que pour la sensation de table juste.
+            <p className="mt-6 max-w-2xl text-[16px] leading-8 text-[rgba(248,241,232,0.82)]">
+              Un restaurant japonais haut de gamme se raconte par la lumière,
+              le rythme, la précision du geste et la manière dont le visiteur
+              comprend l’endroit avant même d’y entrer.
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <Link
-                href={restaurant.reservationPath}
-                className="inline-flex items-center justify-center rounded-full bg-[var(--sage-deep)] px-6 py-3 text-xs uppercase tracking-[0.24em] !text-white transition duration-300 hover:bg-[var(--ink)] hover:!text-white"
-              >
-                Réserver chez Yashiki
+              <Link href={restaurant.reservationPath} className="cta-primary">
+                Réserver maintenant
               </Link>
               <Link
                 href={restaurant.menuPath}
-                className="inline-flex items-center justify-center rounded-full border border-[rgba(36,46,39,0.12)] px-6 py-3 text-xs uppercase tracking-[0.24em] text-[var(--ink)] transition duration-300 hover:border-[rgba(90,110,97,0.34)] hover:bg-white"
+                className="inline-flex items-center justify-center rounded-full border border-[rgba(248,241,232,0.16)] px-6 py-3 text-[11px] uppercase tracking-[0.28em] text-[var(--paper-soft)] transition duration-300 hover:bg-[rgba(248,241,232,0.08)]"
               >
                 Voir la carte
               </Link>
             </div>
-          </div>
-        </Reveal>
+          </Reveal>
 
-        <Reveal delay="80">
-          <div className="relative overflow-hidden rounded-[2.4rem] border border-[rgba(36,46,39,0.1)]">
-            <Image
-              src={laMaisonStock}
-              alt="Intérieur chaleureux du restaurant Yashiki"
-              className="aspect-[5/4] w-full object-cover object-[28%_center]"
-              sizes="(min-width: 1024px) 52vw, 100vw"
-              priority
-            />
-            <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(17,22,18,0.08)_0%,rgba(17,22,18,0.52)_100%)]" />
-            <div className="absolute bottom-6 left-6 max-w-[18rem] rounded-[1.6rem] border border-[rgba(246,241,232,0.18)] bg-[rgba(17,22,18,0.26)] px-5 py-5 backdrop-blur-md">
-              <p className="text-[10px] uppercase tracking-[0.28em] text-[rgba(246,241,232,0.62)]">
-                Service du soir
-              </p>
-              <p className="mt-3 text-sm leading-7 text-[rgba(246,241,232,0.88)]">
-                Une salle qui laisse de la place au repas, au rythme et au
-                retour des habitués.
-              </p>
+          <Reveal delay="100">
+            <div className="dark-panel relative overflow-hidden p-6">
+              <Image
+                src={maisonChefMakingStock}
+                alt=""
+                fill
+                aria-hidden
+                unoptimized
+                className="object-cover object-center opacity-[0.42] saturate-[0.92]"
+                sizes="(min-width: 1024px) 24rem, 100vw"
+              />
+              <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(20,15,13,0.08)_0%,rgba(20,15,13,0.42)_48%,rgba(20,15,13,0.72)_100%)]" />
+              <div className="relative z-10">
+                <p className="vertical-copy hidden text-[10px] uppercase text-[rgba(248,241,232,0.42)] lg:block">
+                  Paris Bois Service Comptoir
+                </p>
+                <div className="mt-0 lg:mt-4">
+                  <OpenStatus light />
+                </div>
+                <p className="mt-5 text-sm leading-7 text-[rgba(248,241,232,0.78)]">
+                  Le site et le lieu racontent la même chose: un Japon chaleureux,
+                  structuré et lisible pour un public parisien.
+                </p>
+              </div>
             </div>
-          </div>
-        </Reveal>
+          </Reveal>
+        </div>
       </section>
 
-      <section className="border-y border-[rgba(36,46,39,0.08)] bg-[rgba(250,244,236,0.62)]">
-        <div className="mx-auto grid w-[min(100%-32px,1280px)] gap-4 py-12 sm:w-[min(100%-48px,1280px)] md:grid-cols-3">
-          {atmosphereNotes.map((note, index) => (
-            <Reveal key={note.title} delay={`${index * 50}`}>
-              <article className="rounded-[1.7rem] border border-[rgba(36,46,39,0.08)] bg-[var(--cream-soft)] p-6">
-                <p className="text-[11px] uppercase tracking-[0.28em] text-[var(--sage)]">
+      <section className="border-b border-[var(--line)] bg-[rgba(248,241,232,0.5)]">
+        <div className="page-shell grid gap-4 py-12 md:grid-cols-3">
+          {spaceNotes.map((note, index) => (
+            <Reveal key={note.title} delay={`${index * 70}`}>
+              <article className="soft-panel p-6">
+                <p className="text-[11px] uppercase tracking-[0.3em] text-[var(--accent)]">
                   {note.title}
                 </p>
                 <p className="mt-4 text-sm leading-7 text-[var(--ink-muted)]">
@@ -152,327 +129,161 @@ export default function MaisonPage() {
         </div>
       </section>
 
-      <section className="mx-auto w-[min(100%-32px,1280px)] py-24 sm:w-[min(100%-48px,1280px)] lg:py-28">
-        <div className="grid gap-10 lg:grid-cols-[0.96fr_1.04fr] lg:items-start">
-          <Reveal>
-            <div className="max-w-[40rem]">
-              <p className="section-label">Le lieu</p>
-              <h2 className="section-title mt-4">
-                La salle, le comptoir et le service doivent parler ensemble.
-              </h2>
-              <p className="section-copy mt-6">
-                La maison ne se résume pas à un joli décor. Elle tient par la
-                manière dont la salle accompagne la cuisine, dont le comptoir
-                reste vivant et dont chaque table reçoit le même soin du début
-                à la fin du service.
-              </p>
-              <p className="section-copy mt-6">
-                Chez Yashiki, le lieu doit rassurer tout de suite: on comprend
-                le ton, on sent la rigueur et on voit qu’il y a une vraie équipe
-                derrière les assiettes.
-              </p>
-
-              <div className="mt-10 grid gap-4 sm:grid-cols-3">
-                {serviceMarkers.map((item) => (
-                  <article
-                    key={item.label}
-                    className="rounded-[1.6rem] border border-[rgba(36,46,39,0.08)] bg-[rgba(251,247,241,0.82)] p-5"
-                  >
-                    <p className="text-[11px] uppercase tracking-[0.28em] text-[var(--sage)]">
-                      {item.label}
-                    </p>
-                    <p className="mt-4 text-sm leading-7 text-[var(--ink-muted)]">
-                      {item.copy}
-                    </p>
-                  </article>
-                ))}
-              </div>
+      <section className="page-shell py-24 lg:py-28">
+        <div className="grid gap-12 lg:grid-cols-[0.42fr_0.58fr] lg:gap-16">
+          <Reveal className="lg:sticky lg:top-28 lg:self-start">
+            <p className="eyebrow">L’histoire du lieu</p>
+            <h2 className="display-title mt-4 max-w-[8ch]">
+              Le lieu parle avant même le premier plat.
+            </h2>
+            <div className="mt-6 grid gap-5">
+              {restaurant.storytelling.map((paragraph) => (
+                <p
+                  key={paragraph}
+                  className="max-w-md text-[15px] leading-8 text-[var(--ink-muted)]"
+                >
+                  {paragraph}
+                </p>
+              ))}
             </div>
-          </Reveal>
 
-          <Reveal delay="80">
-            <div className="grid gap-6">
-              <div className="relative overflow-hidden rounded-[2.2rem] border border-[rgba(36,46,39,0.1)]">
-                <Image
-                  src={maisonDiningStock}
-                  alt="Salle de restaurant japonais contemporaine"
-                  className="aspect-[5/4] w-full object-cover object-center"
-                  sizes="(min-width: 1024px) 46vw, 100vw"
-                  loading="eager"
-                />
-                <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(17,22,18,0.02)_0%,rgba(17,22,18,0.46)_100%)]" />
-                <div className="absolute bottom-6 left-6 max-w-[18rem] rounded-[1.5rem] border border-[rgba(246,241,232,0.18)] bg-[rgba(17,22,18,0.24)] px-5 py-5 backdrop-blur-md">
-                  <p className="text-[10px] uppercase tracking-[0.28em] text-[rgba(246,241,232,0.62)]">
-                    La salle du soir
+            <div className="mt-10 grid gap-4">
+              {restaurant.experiencePillars.map((pillar) => (
+                <div key={pillar.title} className="border-t border-[var(--line)] pt-4">
+                  <p className="text-[11px] uppercase tracking-[0.3em] text-[var(--accent)]">
+                    {pillar.title}
                   </p>
-                  <p className="mt-3 text-sm leading-7 text-[rgba(246,241,232,0.88)]">
-                    Un lieu posé, chaud et lisible, pensé pour dîner plutôt que
-                    seulement passer.
+                  <p className="mt-3 max-w-md text-sm leading-7 text-[var(--ink-muted)]">
+                    {pillar.copy}
                   </p>
                 </div>
-              </div>
-
-              <div className="grid gap-6 sm:grid-cols-[0.62fr_0.38fr]">
-                <div className="relative overflow-hidden rounded-[2rem] border border-[rgba(36,46,39,0.1)]">
-                  <Image
-                    src={maisonChefStock}
-                    alt="Chef dressant des pièces au comptoir"
-                    className="aspect-[5/4] w-full object-cover object-[44%_center]"
-                    sizes="(min-width: 1024px) 28vw, 100vw"
-                    loading="eager"
-                  />
-                  <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(17,22,18,0.04)_0%,rgba(17,22,18,0.38)_100%)]" />
-                  <div className="absolute bottom-5 left-5 max-w-[15rem] rounded-[1.4rem] border border-[rgba(246,241,232,0.16)] bg-[rgba(17,22,18,0.22)] px-4 py-4 backdrop-blur-md">
-                    <p className="text-[10px] uppercase tracking-[0.28em] text-[rgba(246,241,232,0.62)]">
-                      Le geste
-                    </p>
-                    <p className="mt-3 text-sm leading-7 text-[rgba(246,241,232,0.88)]">
-                      Finitions nettes, montage minute et assiettes envoyées
-                      sans lourdeur.
-                    </p>
-                  </div>
-                </div>
-
-                <div className="relative min-h-[19rem] overflow-hidden rounded-[2rem] border border-[rgba(36,46,39,0.1)] bg-[rgba(20,18,16,0.08)]">
-                  <Image
-                    src={maisonBarStock}
-                    alt="Comptoir de restaurant japonais"
-                    fill
-                    className="object-cover object-center"
-                    sizes="(min-width: 1024px) 18vw, 100vw"
-                    loading="eager"
-                  />
-                  <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(17,22,18,0.06)_0%,rgba(17,22,18,0.34)_100%)]" />
-                  <div className="absolute inset-x-4 bottom-4 rounded-[1.2rem] border border-[rgba(246,241,232,0.14)] bg-[rgba(17,22,18,0.22)] px-4 py-4 backdrop-blur-md">
-                    <p className="text-[10px] uppercase tracking-[0.26em] text-[rgba(246,241,232,0.62)]">
-                      Le comptoir
-                    </p>
-                    <p className="mt-3 text-sm leading-7 text-[rgba(246,241,232,0.88)]">
-                      Une place plus directe sur le service, le geste et la
-                      salle.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </Reveal>
-        </div>
-      </section>
-
-      <section className="border-y border-[rgba(36,46,39,0.08)] bg-[rgba(250,244,236,0.58)]">
-        <div className="mx-auto grid w-[min(100%-32px,1280px)] gap-10 py-24 sm:w-[min(100%-48px,1280px)] lg:grid-cols-[0.92fr_1.08fr] lg:items-center lg:py-28">
-          <Reveal>
-            <div className="relative overflow-hidden rounded-[2.4rem] border border-[rgba(36,46,39,0.1)]">
-              <Image
-                src={maisonChefMakingStock}
-                alt="Cuisinier préparant des sushis au comptoir"
-                className="aspect-[4/5] w-full object-cover object-center"
-                sizes="(min-width: 1024px) 42vw, 100vw"
-                loading="eager"
-              />
-              <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(17,22,18,0.04)_0%,rgba(17,22,18,0.42)_100%)]" />
-              <div className="absolute bottom-6 left-6 max-w-[17rem] rounded-[1.6rem] border border-[rgba(246,241,232,0.18)] bg-[rgba(17,22,18,0.24)] px-5 py-5 backdrop-blur-md">
-                <p className="text-[10px] uppercase tracking-[0.28em] text-[rgba(246,241,232,0.62)]">
-                  Nos cuisiniers
-                </p>
-                <p className="mt-3 text-sm leading-7 text-[rgba(246,241,232,0.88)]">
-                  Une équipe courte qui tient la ligne de la maison avec calme,
-                  précision et régularité.
-                </p>
-              </div>
+              ))}
             </div>
           </Reveal>
 
-          <Reveal delay="80">
-            <div className="max-w-[42rem]">
-              <p className="section-label">Nos cuisiniers</p>
-              <h2 className="section-title mt-4">
-                Une brigade visible, précise et vraiment faite pour tenir le soir.
-              </h2>
-              <p className="section-copy mt-6">
-                Les cuisiniers de la maison travaillent dans une logique simple:
-                monter juste, couper net, envoyer propre. Ce n’est pas une
-                cuisine d’esbroufe. C’est une cuisine de régularité, pensée pour
-                que chaque table retrouve le même niveau de soin.
-              </p>
-              <p className="section-copy mt-6">
-                Depuis le comptoir, on voit les mains, les gestes, le riz, les
-                sauces, les finitions et la tension du service. C’est ce genre
-                de présence qui rend un restaurant vivant.
-              </p>
-
-              <div className="mt-10 grid gap-4 sm:grid-cols-3">
-                {kitchenNotes.map((item) => (
-                  <article
-                    key={item.label}
-                    className="rounded-[1.6rem] border border-[rgba(36,46,39,0.08)] bg-[rgba(251,247,241,0.82)] p-5"
-                  >
-                    <p className="text-[11px] uppercase tracking-[0.28em] text-[var(--sage)]">
-                      {item.label}
-                    </p>
-                    <p className="mt-4 text-sm leading-7 text-[var(--ink-muted)]">
-                      {item.copy}
-                    </p>
-                  </article>
-                ))}
-              </div>
-            </div>
-          </Reveal>
-        </div>
-      </section>
-
-      <section className="mx-auto w-[min(100%-32px,1280px)] py-24 sm:w-[min(100%-48px,1280px)] lg:py-28">
-        <div className="grid gap-10 lg:grid-cols-[1.04fr_0.96fr] lg:items-start">
-          <Reveal>
-            <div className="grid gap-4">
-              <div className="rounded-[2.1rem] border border-[rgba(36,46,39,0.1)] bg-[rgba(251,247,241,0.82)] p-7">
-                <p className="text-[11px] uppercase tracking-[0.3em] text-[var(--sage)]">
-                  Google Maps
-                </p>
-                <h2 className="mt-3 max-w-[14ch] text-[clamp(2.3rem,4vw,4rem)] leading-[0.95] tracking-[-0.05em] text-[var(--ink)]">
-                  Trouver la maison en un regard.
-                </h2>
-                <p className="mt-5 max-w-xl text-sm leading-7 text-[var(--ink-muted)]">
-                  L’adresse, la carte et la réservation restent au même
-                  endroit, sans détour inutile.
-                </p>
-              </div>
-
-              <div className="overflow-hidden rounded-[2.3rem] border border-[rgba(36,46,39,0.1)] bg-[rgba(251,247,241,0.82)]">
+          <div className="grid gap-6">
+            <Reveal>
+              <div className="overflow-hidden rounded-[2rem] border border-[var(--line)]">
                 <Image
-                  src={maisonMapStatic}
-                  alt="Carte de localisation de Yashiki dans le Marais"
-                  className="h-[470px] w-full object-cover"
-                  sizes="(min-width: 1024px) 52vw, 100vw"
+                  src={pexelsJapaneseInterior}
+                  alt="Intérieur chaleureux de restaurant japonais avec lumière ambrée"
+                  unoptimized
+                  className="aspect-[5/4] w-full object-cover"
+                  sizes="(min-width: 1024px) 44rem, 100vw"
                 />
-                <div className="border-t border-[rgba(36,46,39,0.08)] p-6">
-                  <div className="flex flex-col gap-3 sm:flex-row">
-                    <a
-                      href={restaurant.googleMapsHref}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="inline-flex items-center justify-center rounded-full bg-[var(--sage-deep)] px-6 py-3 text-xs uppercase tracking-[0.24em] !text-white transition duration-300 hover:bg-[var(--ink)] hover:!text-white"
-                    >
-                      Ouvrir Google Maps
-                    </a>
-                    <a
-                      href={restaurant.phoneHref}
-                      className="inline-flex items-center justify-center rounded-full border border-[rgba(36,46,39,0.12)] px-6 py-3 text-xs uppercase tracking-[0.24em] text-[var(--ink)] transition duration-300 hover:border-[rgba(90,110,97,0.34)] hover:bg-white"
-                    >
-                      {restaurant.phoneDisplay}
-                    </a>
-                  </div>
-                </div>
               </div>
-            </div>
-          </Reveal>
+            </Reveal>
 
-          <Reveal delay="80">
-            <div className="grid gap-4">
-              <article className="rounded-[2rem] border border-[rgba(36,46,39,0.08)] bg-[rgba(251,247,241,0.82)] p-7">
-                <p className="text-[11px] uppercase tracking-[0.28em] text-[var(--sage)]">
-                  Google reviews
-                </p>
-                <div className="mt-5 flex items-end justify-between gap-4">
-                  <div>
-                    <p className="text-[2.6rem] leading-none tracking-[-0.06em] text-[var(--ink)]">
-                      4.8
-                    </p>
-                    <p className="mt-2 text-sm leading-7 text-[var(--ink-muted)]">
-                      127 avis Google
-                    </p>
-                  </div>
-                  <div className="flex items-center gap-1 text-[var(--sage-deep)]">
-                    <span className="text-xl">★</span>
-                    <span className="text-xl">★</span>
-                    <span className="text-xl">★</span>
-                    <span className="text-xl">★</span>
-                    <span className="text-xl">★</span>
-                  </div>
+            <div className="grid gap-6 sm:grid-cols-[0.52fr_0.48fr]">
+              <Reveal delay="80">
+                <div className="overflow-hidden rounded-[2rem] border border-[var(--line)]">
+                  <Image
+                    src={pexelsLanternChef}
+                    alt="Cuisine ouverte japonaise sous des lanternes chaudes"
+                    unoptimized
+                    className="aspect-[4/5] w-full object-cover object-[46%_center]"
+                    sizes="(min-width: 1024px) 20rem, 100vw"
+                  />
                 </div>
-                <p className="mt-5 text-lg leading-8 tracking-[-0.02em] text-[var(--ink)]">
-                  Une note forte, portée autant par l’ambiance de salle que par
-                  la régularité du service.
-                </p>
-                <p className="mt-4 text-sm leading-7 text-[var(--ink-muted)]">
-                  Les retours parlent surtout du calme de la salle, du comptoir
-                  visible et d’une cuisine précise qui donne envie de revenir.
-                </p>
-                <div className="mt-6 grid gap-3">
-                  {mockGoogleReviews.map((review) => (
-                    <details
-                      key={review.name}
-                      className="rounded-[1.4rem] border border-[rgba(36,46,39,0.08)] bg-[rgba(245,238,228,0.68)] px-4 py-4"
-                    >
-                      <summary className="cursor-pointer list-none text-[11px] uppercase tracking-[0.24em] text-[var(--sage)]">
-                        {review.name}
-                      </summary>
-                      <p className="mt-3 text-sm leading-7 text-[var(--ink-muted)]">
-                        {review.quote}
-                      </p>
-                    </details>
-                  ))}
-                </div>
-              </article>
+              </Reveal>
 
-              <article className="rounded-[2rem] border border-[rgba(36,46,39,0.08)] bg-[rgba(251,247,241,0.82)] p-7">
-                <p className="text-[11px] uppercase tracking-[0.28em] text-[var(--sage)]">
-                  Ce que les habitués retiennent
-                </p>
-                <div className="mt-5 flex flex-wrap gap-2">
-                  {restaurant.guestHighlights.map((highlight) => (
-                    <span
-                      key={highlight}
-                      className="rounded-full border border-[rgba(36,46,39,0.1)] bg-[rgba(245,238,228,0.74)] px-3 py-2 text-[10px] uppercase tracking-[0.22em] text-[var(--sage-deep)]"
-                    >
-                      {highlight}
-                    </span>
-                  ))}
+              <Reveal delay="140">
+                <div className="grid gap-6">
+                  <div className="overflow-hidden rounded-[2rem] border border-[var(--line)]">
+                    <Image
+                      src={maisonBarStock}
+                      alt="Bar du restaurant Yashiki"
+                      unoptimized
+                      className="aspect-[4/3] w-full object-cover"
+                      sizes="(min-width: 1024px) 18rem, 100vw"
+                    />
+                  </div>
+                  <div className="soft-panel p-6">
+                    <p className="text-[11px] uppercase tracking-[0.3em] text-[var(--accent)]">
+                      Origine & détails
+                    </p>
+                    <div className="mt-4 grid gap-4">
+                      {restaurant.sourcingNotes.map((note) => (
+                        <p key={note} className="text-sm leading-7 text-[var(--ink-muted)]">
+                          {note}
+                        </p>
+                      ))}
+                    </div>
+                  </div>
                 </div>
-              </article>
+              </Reveal>
             </div>
-          </Reveal>
+          </div>
         </div>
       </section>
 
-      <section className="border-t border-[rgba(36,46,39,0.08)] bg-[var(--cream-deep)]">
-        <div className="mx-auto grid w-[min(100%-32px,1280px)] gap-10 py-20 sm:w-[min(100%-48px,1280px)] lg:grid-cols-[0.98fr_1.02fr] lg:items-center lg:py-24">
-          <Reveal>
-            <div className="overflow-hidden rounded-[2.2rem] border border-[rgba(36,46,39,0.1)]">
+      <section className="border-y border-[var(--line)] bg-[rgba(248,241,232,0.56)]">
+        <div className="page-shell grid gap-10 py-24 lg:grid-cols-[0.54fr_0.46fr] lg:gap-16 lg:py-28">
+          <Reveal className="lg:sticky lg:top-28 lg:self-start">
+            <div className="overflow-hidden rounded-[2rem] border border-[var(--line)]">
               <Image
-                src={maisonDiningStock}
-                alt="Salle chaleureuse du restaurant le soir"
-                className="aspect-[4/3] w-full object-cover object-center"
-                sizes="(min-width: 1024px) 42vw, 100vw"
+                src={maisonCounterStock}
+                alt="Comptoir japonais vivant, lumières suspendues et ardoises de menu"
+                unoptimized
+                className="aspect-[5/4] w-full object-cover"
+                sizes="(min-width: 1024px) 40rem, 100vw"
               />
             </div>
           </Reveal>
 
           <Reveal delay="80">
-            <div className="max-w-[40rem]">
-              <p className="section-label">Réserver maintenant</p>
-              <h2 className="section-title mt-4">
-                Après l’ambiance, place à la table.
-              </h2>
-              <p className="section-copy mt-6">
-                Le lieu donne le ton. Il ne reste plus qu’à choisir le soir, le
-                créneau et la bonne façon de réserver selon le nombre de
-                convives.
-              </p>
-              <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-                <Link
-                  href={restaurant.reservationPath}
-                  className="inline-flex items-center justify-center rounded-full bg-[var(--sage-deep)] px-6 py-3 text-xs uppercase tracking-[0.24em] !text-white transition duration-300 hover:bg-[var(--ink)] hover:!text-white"
+            <p className="eyebrow">Ce que les gens retiennent</p>
+            <h2 className="display-title mt-4 max-w-[8ch]">
+              Le souvenir naît du détail, pas du bruit.
+            </h2>
+            <div className="mt-8 grid gap-6">
+              {restaurant.reviewSamples.slice(0, 2).map((review) => (
+                <article key={review.name} className="border-t border-[var(--line)] pt-6">
+                  <p className="text-[11px] uppercase tracking-[0.28em] text-[var(--accent)]">
+                    {review.source} · {review.name}
+                  </p>
+                  <p className="mt-4 text-lg leading-8 tracking-[-0.02em] text-[var(--ink)]">
+                    “{review.quote}”
+                  </p>
+                </article>
+              ))}
+            </div>
+
+            <div className="mt-8 flex flex-wrap gap-2">
+              {restaurant.guestHighlights.map((highlight) => (
+                <span
+                  key={highlight}
+                  className="rounded-full border border-[var(--line)] bg-[rgba(248,241,232,0.72)] px-4 py-2 text-[10px] uppercase tracking-[0.24em] text-[var(--ink-muted)]"
                 >
-                  Ouvrir la réservation
-                </Link>
-                <a
-                  href={restaurant.phoneHref}
-                  className="inline-flex items-center justify-center rounded-full border border-[rgba(36,46,39,0.12)] px-6 py-3 text-xs uppercase tracking-[0.24em] text-[var(--ink)] transition duration-300 hover:border-[rgba(90,110,97,0.34)] hover:bg-white"
-                >
-                  {restaurant.phoneDisplay}
-                </a>
-              </div>
+                  {highlight}
+                </span>
+              ))}
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      <section className="page-shell py-20 lg:py-24">
+        <div className="grid gap-8 lg:grid-cols-[0.6fr_0.4fr] lg:items-center">
+          <Reveal>
+            <p className="eyebrow">Réserver</p>
+            <h2 className="display-title mt-4 max-w-[9ch]">
+              Le lieu est clair. Il reste à choisir le service.
+            </h2>
+            <p className="mt-6 max-w-xl text-[15px] leading-8 text-[var(--ink-muted)]">
+              L’expérience continue avec une réservation simple, des horaires
+              visibles et un accès direct au téléphone si tu veux aller vite.
+            </p>
+          </Reveal>
+
+          <Reveal delay="80">
+            <div className="flex flex-col gap-3 sm:flex-row sm:justify-end">
+              <Link href={restaurant.reservationPath} className="cta-primary">
+                Réserver maintenant
+              </Link>
+              <a href={restaurant.phoneHref} className="cta-secondary">
+                {restaurant.phoneDisplay}
+              </a>
             </div>
           </Reveal>
         </div>

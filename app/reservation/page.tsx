@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 import MobileBookingBar from "@/components/mobile-booking-bar";
+import OpenStatus from "@/components/open-status";
 import Reveal from "@/components/reveal";
 import SiteFooter from "@/components/site-footer";
 import SiteHeader from "@/components/site-header";
@@ -10,64 +11,81 @@ import { restaurant } from "@/data/restaurant";
 export const metadata: Metadata = {
   title: "Réservation",
   description:
-    "Réserve chez Yashiki à Paris. Horaires, téléphone, email, groupes, comptoir et informations utiles réunis sur une page dédiée.",
+    "Réserve chez Yashiki à Paris avec un parcours clair: horaires, téléphone, email, FAQ et carte interactive.",
 };
+
+const reservationChannels = [
+  {
+    title: "Appeler",
+    copy:
+      "Le plus rapide pour bloquer une table, viser le comptoir ou confirmer un dîner le jour même.",
+    href: restaurant.phoneHref,
+    label: "Appeler maintenant",
+  },
+  {
+    title: "Écrire",
+    copy:
+      "Le bon choix pour les groupes, allergies, demandes particulières ou privatisations ponctuelles.",
+    href: restaurant.emailHref,
+    label: "Écrire à l’équipe",
+  },
+  {
+    title: "Préparer",
+    copy:
+      "Avoir le nombre de convives, l’horaire visé et les contraintes alimentaires réduit les allers-retours.",
+    href: restaurant.menuPath,
+    label: "Voir la carte",
+  },
+];
 
 export default function ReservationPage() {
   return (
-    <main className="min-h-screen bg-[var(--cream-soft)] text-[var(--ink)]">
+    <main id="main-content" className="min-h-screen bg-[var(--paper-soft)] text-[var(--ink)]">
       <SiteHeader />
 
-      <section className="mx-auto w-[min(100%-32px,1280px)] py-12 sm:w-[min(100%-48px,1280px)] lg:py-20">
+      <section className="page-shell py-12 lg:py-16">
         <Reveal>
-          <div className="rounded-[2.5rem] border border-[rgba(36,46,39,0.1)] bg-[linear-gradient(180deg,rgba(100,118,104,0.12)_0%,rgba(251,247,241,0.92)_100%)] px-7 py-8 sm:px-10 sm:py-10 lg:px-14 lg:py-14">
-            <div className="grid gap-10 lg:grid-cols-[0.96fr_1.04fr] lg:items-end">
+          <div className="soft-panel p-7 sm:p-8 lg:p-12">
+            <div className="grid gap-10 lg:grid-cols-[0.62fr_0.38fr] lg:gap-14">
               <div>
-                <p className="section-label">Réserver</p>
-                <h1 className="mt-5 max-w-[12ch] text-[clamp(3.2rem,6.6vw,6.6rem)] leading-[0.9] tracking-[-0.06em] text-[var(--ink)]">
+                <p className="eyebrow">Réserver</p>
+                <h1 className="display-title mt-4 max-w-[9ch]">
                   Une table, un horaire, et c’est réglé.
                 </h1>
-                <p className="mt-6 max-w-2xl text-[17px] leading-9 text-[var(--ink-muted)]">
-                  Adresse, horaires, téléphone, email, groupes et contraintes
-                  alimentaires sont réunis ici pour réserver vite et sans
-                  friction, que ce soit pour un dîner à deux ou une table plus
-                  large.
+                <p className="mt-6 max-w-2xl text-[16px] leading-8 text-[var(--ink-muted)]">
+                  Téléphone, email, horaires, FAQ et carte interactive sont au
+                  même endroit. Le parcours est conçu pour décider vite, surtout
+                  sur mobile.
                 </p>
-              </div>
 
-              <div className="rounded-[2rem] border border-[rgba(36,46,39,0.08)] bg-[rgba(251,247,241,0.78)] p-6">
-                <div className="grid gap-4 text-sm leading-7 text-[var(--ink-muted)] sm:grid-cols-2">
-                  <div>
-                    <p className="text-[11px] uppercase tracking-[0.28em] text-[var(--sage)]">
-                      Adresse
-                    </p>
-                    <p className="mt-3">{restaurant.addressLine}</p>
-                  </div>
-                  <div>
-                    <p className="text-[11px] uppercase tracking-[0.28em] text-[var(--sage)]">
-                      Réservation
-                    </p>
-                    <p className="mt-3">
-                      <a href={restaurant.phoneHref}>{restaurant.phoneDisplay}</a>
-                    </p>
-                    <p>
-                      <a href={restaurant.emailHref}>{restaurant.email}</a>
-                    </p>
-                  </div>
-                </div>
-                <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-                  <a
-                    href={restaurant.phoneHref}
-                    className="inline-flex items-center justify-center rounded-full bg-[var(--sage-deep)] px-6 py-3 text-xs uppercase tracking-[0.24em] !text-white transition duration-300 hover:bg-[var(--ink)] hover:!text-white"
-                  >
+                <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+                  <a href={restaurant.phoneHref} className="cta-primary">
                     Appeler maintenant
                   </a>
-                  <a
-                    href={restaurant.emailHref}
-                    className="inline-flex items-center justify-center rounded-full border border-[rgba(36,46,39,0.12)] px-6 py-3 text-xs uppercase tracking-[0.24em] text-[var(--ink)] transition duration-300 hover:border-[rgba(90,110,97,0.34)] hover:bg-white"
-                  >
+                  <a href={restaurant.emailHref} className="cta-secondary">
                     Écrire à l’équipe
                   </a>
+                </div>
+              </div>
+
+              <div className="grid gap-4">
+                <OpenStatus />
+                <div className="soft-panel p-5">
+                  <p className="text-[11px] uppercase tracking-[0.28em] text-[var(--accent)]">
+                    Adresse
+                  </p>
+                  <p className="mt-3 text-sm leading-7 text-[var(--ink-muted)]">
+                    {restaurant.addressLine}
+                  </p>
+                </div>
+                <div className="soft-panel p-5">
+                  <p className="text-[11px] uppercase tracking-[0.28em] text-[var(--accent)]">
+                    Réservation
+                  </p>
+                  <div className="mt-3 grid gap-2 text-sm leading-7 text-[var(--ink-muted)]">
+                    <a href={restaurant.phoneHref}>{restaurant.phoneDisplay}</a>
+                    <a href={restaurant.emailHref}>{restaurant.email}</a>
+                  </div>
                 </div>
               </div>
             </div>
@@ -75,75 +93,113 @@ export default function ReservationPage() {
         </Reveal>
       </section>
 
-      <section className="mx-auto w-[min(100%-32px,1280px)] py-4 sm:w-[min(100%-48px,1280px)] lg:py-10">
-        <div className="grid gap-4 lg:grid-cols-[0.78fr_1.22fr]">
-          <Reveal>
-            <div className="rounded-[2rem] border border-[rgba(36,46,39,0.08)] bg-[rgba(251,247,241,0.78)] p-7">
-              <p className="section-label">Horaires</p>
-              <div className="mt-6 grid gap-5">
-                {restaurant.openingHours.map((slot) => (
-                  <div key={slot.days}>
-                    <p className="text-[11px] uppercase tracking-[0.28em] text-[var(--sage)]">
-                      {slot.days}
-                    </p>
-                    <p className="mt-3 text-[15px] leading-8 text-[var(--ink-muted)]">
-                      {slot.hours}
-                    </p>
-                  </div>
-                ))}
-              </div>
-              <div className="mt-6 h-px bg-[rgba(36,46,39,0.1)]" />
-              <p className="mt-6 text-sm leading-7 text-[var(--ink-muted)]">
-                {restaurant.reservationsLabel}. Les places au comptoir sont en
-                nombre limité.
-              </p>
-            </div>
-          </Reveal>
-
-          <div className="grid gap-4 md:grid-cols-3">
-            {restaurant.reservationSteps.map((step, index) => (
-              <Reveal key={step.title} delay={`${index * 60}`}>
-                <article className="h-full rounded-[1.8rem] border border-[rgba(36,46,39,0.08)] bg-[rgba(251,247,241,0.78)] p-6">
-                  <p className="text-[11px] uppercase tracking-[0.28em] text-[var(--sage)]">
-                    {String(index + 1).padStart(2, "0")}
-                  </p>
-                  <h2 className="mt-4 text-2xl leading-[1.05] tracking-[-0.04em] text-[var(--ink)]">
-                    {step.title}
-                  </h2>
-                  <p className="mt-4 text-sm leading-7 text-[var(--ink-muted)]">
-                    {step.copy}
-                  </p>
-                </article>
-              </Reveal>
-            ))}
-          </div>
+      <section className="page-shell py-10 lg:py-14">
+        <div className="grid gap-6 lg:grid-cols-3">
+          {reservationChannels.map((channel, index) => (
+            <Reveal key={channel.title} delay={`${index * 70}`}>
+              <article className="soft-panel h-full p-6">
+                <p className="text-[11px] uppercase tracking-[0.3em] text-[var(--accent)]">
+                  {String(index + 1).padStart(2, "0")} · {channel.title}
+                </p>
+                <h2 className="mt-4 text-[clamp(2rem,4vw,3rem)] leading-[0.96] tracking-[-0.05em] text-[var(--ink)]">
+                  {channel.title}
+                </h2>
+                <p className="mt-4 text-sm leading-7 text-[var(--ink-muted)]">
+                  {channel.copy}
+                </p>
+                <a
+                  href={channel.href}
+                  className="mt-6 inline-flex items-center gap-3 text-[11px] uppercase tracking-[0.28em] text-[var(--accent-deep)] transition duration-300 hover:gap-4"
+                >
+                  {channel.label}
+                  <span aria-hidden>↗</span>
+                </a>
+              </article>
+            </Reveal>
+          ))}
         </div>
       </section>
 
-      <section className="mx-auto w-[min(100%-32px,1280px)] py-20 sm:w-[min(100%-48px,1280px)] lg:py-24">
-        <div className="grid gap-10 lg:grid-cols-[0.88fr_1.12fr] lg:items-start">
-          <Reveal>
-            <div className="max-w-2xl">
-              <p className="section-label">FAQ réservation</p>
-              <h2 className="section-title mt-4">
-                Les questions utiles avant de confirmer la table.
-              </h2>
-              <p className="section-copy mt-6">
-                Retrouve ici les réponses qui évitent les allers-retours
-                inutiles avant le service: groupes, allergies, options
-                végétariennes ou rythme de réservation.
-              </p>
+      <section className="border-y border-[var(--line)] bg-[rgba(248,241,232,0.54)]">
+        <div className="page-shell grid gap-10 py-20 lg:grid-cols-[0.56fr_0.44fr] lg:items-stretch lg:gap-14 lg:py-24">
+          <Reveal className="lg:sticky lg:top-28">
+            <div className="overflow-hidden rounded-[2rem] border border-[var(--line)] bg-[rgba(248,241,232,0.72)] lg:h-full lg:min-h-[44rem]">
+              <iframe
+                src={restaurant.googleMapsEmbedSrc}
+                title="Carte interactive pour trouver Yashiki"
+                className="h-[420px] w-full lg:h-full"
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              />
             </div>
+          </Reveal>
+
+          <Reveal delay="80">
+            <p className="eyebrow">Infos pratiques</p>
+            <h2 className="display-title mt-4 max-w-[8ch]">
+              Aujourd’hui, tout est clair avant de valider.
+            </h2>
+            <div className="mt-8 grid gap-4">
+              <div className="soft-panel p-5">
+                <p className="text-[11px] uppercase tracking-[0.28em] text-[var(--accent)]">
+                  Horaires
+                </p>
+                <div className="mt-3 grid gap-3 text-sm leading-7 text-[var(--ink-muted)]">
+                  {restaurant.openingHours.map((slot) => (
+                    <p key={slot.days}>
+                      <span className="block text-[var(--ink)]">{slot.days}</span>
+                      <span>{slot.hours}</span>
+                    </p>
+                  ))}
+                </div>
+              </div>
+
+              <div className="soft-panel p-5">
+                <p className="text-[11px] uppercase tracking-[0.28em] text-[var(--accent)]">
+                  Avant de confirmer
+                </p>
+                <div className="mt-4 grid gap-4">
+                  {restaurant.reservationSteps.map((step, index) => (
+                    <div
+                      key={step.title}
+                      className="border-t border-[var(--line)] pt-4 first:border-t-0 first:pt-0"
+                    >
+                      <p className="text-[11px] uppercase tracking-[0.28em] text-[var(--accent)]">
+                        {String(index + 1).padStart(2, "0")} · {step.title}
+                      </p>
+                      <p className="mt-3 text-sm leading-7 text-[var(--ink-muted)]">
+                        {step.copy}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      <section className="page-shell py-20 lg:py-24">
+        <div className="grid gap-10 lg:grid-cols-[0.42fr_0.58fr] lg:gap-14">
+          <Reveal>
+            <p className="eyebrow">FAQ réservation</p>
+            <h2 className="display-title mt-4 max-w-[8ch]">
+              Les réponses utiles avant d’arriver.
+            </h2>
+            <p className="mt-6 max-w-md text-[15px] leading-8 text-[var(--ink-muted)]">
+              L’objectif est simple: limiter les doutes, alléger la charge
+              mentale et éviter les allers-retours avant le service.
+            </p>
           </Reveal>
 
           <div className="grid gap-4">
             {restaurant.faq.map((item, index) => (
-              <Reveal key={item.question} delay={`${index * 40}`}>
-                <details className="rounded-[1.7rem] border border-[rgba(36,46,39,0.08)] bg-[rgba(251,247,241,0.8)] px-6 py-5">
-                  <summary className="cursor-pointer list-none text-lg leading-8 tracking-[-0.02em] text-[var(--ink)]">
+              <Reveal key={item.question} delay={`${index * 50}`}>
+                <details className="soft-panel px-6 py-5">
+                  <summary className="cursor-pointer list-none text-lg leading-8 tracking-[-0.02em] text-[var(--ink)] marker:content-none">
                     {item.question}
                   </summary>
-                  <p className="mt-4 max-w-3xl text-sm leading-7 text-[var(--ink-muted)]">
+                  <p className="mt-4 text-sm leading-7 text-[var(--ink-muted)]">
                     {item.answer}
                   </p>
                 </details>
@@ -153,29 +209,21 @@ export default function ReservationPage() {
         </div>
       </section>
 
-      <section className="border-t border-[rgba(36,46,39,0.08)] bg-[var(--cream)]">
-        <div className="mx-auto grid w-[min(100%-32px,1280px)] gap-10 py-20 sm:w-[min(100%-48px,1280px)] lg:grid-cols-[0.9fr_1.1fr] lg:items-center lg:py-24">
+      <section className="border-t border-[var(--line)] bg-[rgba(248,241,232,0.5)]">
+        <div className="page-shell grid gap-8 py-20 lg:grid-cols-[0.58fr_0.42fr] lg:items-center lg:py-24">
           <Reveal>
-            <div className="max-w-2xl">
-              <p className="section-label">Passer à l’action</p>
-              <h2 className="section-title mt-4">
-                Réserve maintenant ou retourne voir la carte avant de choisir.
-              </h2>
-            </div>
+            <p className="eyebrow">Dernière étape</p>
+            <h2 className="display-title mt-4 max-w-[9ch]">
+              Réserver maintenant ou revoir la carte avant de choisir.
+            </h2>
           </Reveal>
 
           <Reveal delay="80">
             <div className="flex flex-col gap-3 sm:flex-row sm:justify-end">
-              <a
-                href={restaurant.phoneHref}
-                className="inline-flex items-center justify-center rounded-full bg-[var(--sage-deep)] px-6 py-3 text-xs uppercase tracking-[0.24em] !text-white transition duration-300 hover:bg-[var(--ink)] hover:!text-white"
-              >
+              <a href={restaurant.phoneHref} className="cta-primary">
                 {restaurant.phoneDisplay}
               </a>
-              <Link
-                href={restaurant.menuPath}
-                className="inline-flex items-center justify-center rounded-full border border-[rgba(36,46,39,0.12)] px-6 py-3 text-xs uppercase tracking-[0.24em] text-[var(--ink)] transition duration-300 hover:border-[rgba(90,110,97,0.34)] hover:bg-white"
-              >
+              <Link href={restaurant.menuPath} className="cta-secondary">
                 Revenir à la carte
               </Link>
             </div>

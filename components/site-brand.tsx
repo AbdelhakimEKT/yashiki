@@ -5,17 +5,18 @@ import logoSecondary from "@/imagee/logo-secondary.png";
 
 type SiteBrandProps = {
   light?: boolean;
+  hideLogo?: boolean;
 };
 
-export default function SiteBrand({ light = false }: SiteBrandProps) {
-  const tone = light ? "opacity-100" : "opacity-[0.88]";
-  const textTone = light
-    ? "text-[rgba(246,241,232,0.96)]"
-    : "text-[var(--ink)]";
-  const logoFx = light
-    ? "brightness-[1.12] drop-shadow-[0_10px_24px_rgba(0,0,0,0.34)]"
-    : "";
-  const labelFx = light ? "drop-shadow-[0_8px_18px_rgba(0,0,0,0.28)]" : "";
+export default function SiteBrand({
+  light = false,
+  hideLogo = false,
+}: SiteBrandProps) {
+  const labelTone = light ? "text-[rgba(248,241,232,0.95)]" : "text-[var(--ink)]";
+  const metaTone = light
+    ? "text-[rgba(248,241,232,0.62)]"
+    : "text-[rgba(93,75,60,0.8)]";
+  const logoFx = light ? "brightness-[1.1] drop-shadow-[0_10px_24px_rgba(0,0,0,0.34)]" : "";
 
   return (
     <Link
@@ -23,17 +24,24 @@ export default function SiteBrand({ light = false }: SiteBrandProps) {
       className="inline-flex items-center gap-3 transition hover:opacity-100"
       aria-label="Retour à l'accueil Yashiki"
     >
-      <Image
-        src={logoSecondary}
-        alt="Yashiki"
-        className={`h-auto w-[4.9rem] object-contain sm:w-[5.5rem] ${tone} ${logoFx}`}
-        priority
-      />
-      <span
-        className={`text-[11px] uppercase tracking-[0.3em] ${textTone} ${labelFx}`}
-      >
-        Yashiki
-      </span>
+      {hideLogo ? null : (
+        <Image
+          src={logoSecondary}
+          alt="Yashiki"
+          className={`h-auto w-[4.8rem] object-contain sm:w-[5.3rem] ${logoFx}`}
+          priority
+        />
+      )}
+      <div className="space-y-1">
+        <span
+          className={`block text-[11px] uppercase tracking-[0.34em] ${labelTone}`}
+        >
+          Yashiki
+        </span>
+        <span className={`block text-[10px] uppercase tracking-[0.28em] ${metaTone}`}>
+          Paris 4e
+        </span>
+      </div>
     </Link>
   );
 }

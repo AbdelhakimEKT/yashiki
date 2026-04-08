@@ -14,7 +14,7 @@ const links = [
   { href: "/", label: "Accueil" },
   { href: restaurant.maisonPath, label: "La maison" },
   { href: restaurant.menuPath, label: "Carte" },
-  { href: restaurant.reservationPath, label: "Réserver" },
+  { href: restaurant.reservationPath, label: "Réserver", primary: true },
 ];
 
 export default function SiteNav({ light = false }: SiteNavProps) {
@@ -22,14 +22,14 @@ export default function SiteNav({ light = false }: SiteNavProps) {
   const pathname = usePathname();
 
   const shell = light
-    ? "border border-[rgba(246,241,232,0.2)] bg-[rgba(20,23,21,0.34)] text-[rgba(246,241,232,0.96)] shadow-[0_12px_34px_rgba(0,0,0,0.2)]"
-    : "border border-[rgba(36,46,39,0.1)] bg-[rgba(251,247,241,0.84)] text-[var(--ink-muted)]";
+    ? "border border-[rgba(248,241,232,0.16)] bg-[rgba(20,15,13,0.42)] text-[rgba(248,241,232,0.94)] shadow-[0_18px_40px_rgba(0,0,0,0.2)]"
+    : "border border-[var(--line)] bg-[rgba(248,241,232,0.8)] text-[var(--ink-muted)]";
 
   const hover = light ? "hover:text-white" : "hover:text-[var(--ink)]";
 
   const mobileShell = light
-    ? "border border-[rgba(246,241,232,0.18)] bg-[rgba(20,23,21,0.78)] text-[rgba(246,241,232,0.9)]"
-    : "border border-[rgba(36,46,39,0.1)] bg-[rgba(251,247,241,0.96)] text-[var(--ink)]";
+    ? "border border-[rgba(248,241,232,0.16)] bg-[rgba(20,15,13,0.88)] text-[rgba(248,241,232,0.94)]"
+    : "border border-[var(--line)] bg-[rgba(248,241,232,0.98)] text-[var(--ink)]";
 
   return (
     <div className="relative">
@@ -38,6 +38,7 @@ export default function SiteNav({ light = false }: SiteNavProps) {
         className={`inline-flex items-center gap-3 rounded-full px-4 py-3 text-[11px] uppercase tracking-[0.28em] backdrop-blur-md transition md:hidden ${shell}`}
         aria-expanded={open}
         aria-controls="site-mobile-nav"
+        aria-label={open ? "Fermer le menu" : "Ouvrir le menu"}
         onClick={() => setOpen((value) => !value)}
       >
         <span>Menu</span>
@@ -47,7 +48,8 @@ export default function SiteNav({ light = false }: SiteNavProps) {
       </button>
 
       <nav
-        className={`hidden items-center gap-3 rounded-full px-3 py-3 text-[11px] uppercase tracking-[0.28em] backdrop-blur-md md:flex ${shell}`}
+        className={`hidden items-center gap-2 rounded-full px-2 py-2 text-[11px] uppercase tracking-[0.28em] backdrop-blur-md md:flex ${shell}`}
+        aria-label="Navigation principale"
       >
         {links.map((link) => {
           const active = pathname === link.href;
@@ -56,12 +58,17 @@ export default function SiteNav({ light = false }: SiteNavProps) {
             <Link
               key={link.href}
               href={link.href}
+              aria-current={active ? "page" : undefined}
               className={`rounded-full px-4 py-2 transition ${hover} ${
                 active
                   ? light
-                    ? "bg-[rgba(246,241,232,0.16)] text-white"
-                    : "bg-[rgba(36,46,39,0.06)] text-[var(--ink)]"
-                  : ""
+                    ? "bg-[rgba(248,241,232,0.12)] text-white"
+                    : "bg-[rgba(24,17,13,0.06)] text-[var(--ink)]"
+                  : link.primary
+                    ? light
+                      ? "bg-[rgba(248,241,232,0.94)] !text-[var(--night)]"
+                      : "bg-[var(--accent)] !text-[var(--paper-soft)]"
+                    : ""
               }`}
             >
               {link.label}
@@ -73,8 +80,11 @@ export default function SiteNav({ light = false }: SiteNavProps) {
       {open ? (
         <div
           id="site-mobile-nav"
-          className={`absolute right-0 top-[calc(100%+12px)] z-40 min-w-[17rem] rounded-[1.5rem] p-3 shadow-[0_24px_60px_rgba(26,20,16,0.14)] backdrop-blur-xl md:hidden ${mobileShell}`}
+          className={`absolute right-0 top-[calc(100%+12px)] z-40 min-w-[18rem] rounded-[1.5rem] p-3 shadow-[0_24px_60px_rgba(26,20,16,0.18)] backdrop-blur-xl md:hidden ${mobileShell}`}
         >
+          <p className="px-3 pb-2 text-[10px] uppercase tracking-[0.32em] text-current/60">
+            Navigation
+          </p>
           <div className="grid gap-2">
             {links.map((link) => {
               const active = pathname === link.href;
@@ -83,10 +93,15 @@ export default function SiteNav({ light = false }: SiteNavProps) {
                 <Link
                   key={link.href}
                   href={link.href}
+                  aria-current={active ? "page" : undefined}
                   className={`rounded-[1rem] px-4 py-3 text-[11px] uppercase tracking-[0.24em] transition ${
                     active
                       ? "bg-[rgba(255,255,255,0.1)]"
-                      : "hover:bg-[rgba(255,255,255,0.08)]"
+                      : link.primary
+                        ? light
+                          ? "bg-[rgba(248,241,232,0.94)] !text-[var(--night)]"
+                          : "bg-[var(--accent)] !text-[var(--paper-soft)]"
+                        : "hover:bg-[rgba(255,255,255,0.08)]"
                   }`}
                   onClick={() => setOpen(false)}
                 >

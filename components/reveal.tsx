@@ -12,7 +12,10 @@ export default function Reveal({
   delay = "0",
 }: RevealProps) {
   return (
-    <div className={className} style={{ transitionDelay: `${delay}ms` }}>
+    <div
+      className={`reveal ${className}`}
+      style={{ animationDelay: `${delay}ms` }}
+    >
       {children}
     </div>
   );
