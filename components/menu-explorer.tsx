@@ -105,6 +105,7 @@ export default function MenuExplorer({ sections }: MenuExplorerProps) {
   const [query, setQuery] = useState(queryFromUrl);
   const [activeSectionId, setActiveSectionId] = useState<string | null>(null);
   const deferredQuery = useDeferredValue(query.trim().toLowerCase());
+  const sectionIdsRef = useRef<string[]>([]);
 
   useEffect(() => {
     const params = new URLSearchParams(paramsString);
@@ -160,6 +161,8 @@ export default function MenuExplorer({ sections }: MenuExplorerProps) {
     .filter((section) => section.items.length > 0);
 
   const sectionIds = filteredSections.map((section) => toSectionId(section.title));
+  sectionIdsRef.current = sectionIds;
+
   const currentSectionId =
     activeSectionId && sectionIds.includes(activeSectionId)
       ? activeSectionId
@@ -205,38 +208,31 @@ export default function MenuExplorer({ sections }: MenuExplorerProps) {
   }, [currentSectionId]);
 
   useEffect(() => {
-    if (sectionIds.length === 0) {
-      return;
-    }
+    const detect = () => {
+      const ids = sectionIdsRef.current;
+      if (ids.length === 0) return;
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const currentSection = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((first, second) => second.intersectionRatio - first.intersectionRatio)[0];
+      // Use 30% from top of viewport as the detection threshold.
+      // The last section whose top edge is above that line is "active".
+      const threshold = window.innerHeight * 0.3;
+      let active = ids[0] ?? null;
 
-        if (currentSection?.target.id) {
-          setActiveSectionId(currentSection.target.id);
+      for (const id of ids) {
+        const el = document.getElementById(id);
+        if (!el) continue;
+        if (el.getBoundingClientRect().top <= threshold) {
+          active = id;
         }
-      },
-      {
-        rootMargin: "-20% 0px -55% 0px",
-        threshold: [0.2, 0.35, 0.6],
-      },
-    );
-
-    sectionIds.forEach((id) => {
-      const section = document.getElementById(id);
-
-      if (section) {
-        observer.observe(section);
       }
-    });
 
-    return () => {
-      observer.disconnect();
+      setActiveSectionId(active);
     };
-  }, [sectionIds]);
+
+    detect();
+    window.addEventListener("scroll", detect, { passive: true });
+    return () => window.removeEventListener("scroll", detect);
+    // Empty deps: the effect mounts once; always reads current sectionIds via ref.
+  }, []);
 
   const visibleItems = filteredSections.reduce(
     (count, section) => count + section.items.length,
@@ -250,10 +246,10 @@ export default function MenuExplorer({ sections }: MenuExplorerProps) {
         <div className="grid gap-6 lg:grid-cols-[0.62fr_0.38fr] lg:items-end">
           <div>
             <p className="eyebrow">Explorer la carte</p>
-            <h2 className="mt-4 text-[clamp(2.1rem,4.6vw,4.6rem)] leading-[0.94] tracking-[-0.05em] text-[var(--ink)]">
+            <h2 className="mt-3 text-[clamp(1.7rem,4.6vw,4.6rem)] leading-[0.94] tracking-[-0.05em] text-[var(--ink)]">
               Cherche vite, filtre clair, choix immédiat.
             </h2>
-            <p className="mt-4 max-w-2xl text-sm leading-7 text-[var(--ink-muted)] md:hidden">
+            <p className="mt-3 max-w-2xl text-sm leading-7 text-[var(--ink-muted)] md:hidden">
               Va droit aux plats, filtre si besoin, et décide vite.
             </p>
             <p className="mt-5 hidden max-w-2xl text-[15px] leading-8 text-[var(--ink-muted)] md:block">
@@ -283,7 +279,7 @@ export default function MenuExplorer({ sections }: MenuExplorerProps) {
           </label>
         </div>
 
-        <div className="mt-6 flex min-w-0 gap-2 overflow-x-auto overflow-y-hidden pb-1 [overscroll-behavior-x:contain] [scrollbar-width:none] [-ms-overflow-style:none] sm:flex-wrap sm:overflow-visible">
+        <div className="mt-6 flex min-w-0 gap-2 overflow-x-auto overflow-y-hidden pb-1 [overscroll-behavior-x:contain] [scrollbar-width:none] [touch-action:pan-x] [-ms-overflow-style:none] sm:flex-wrap sm:overflow-visible sm:[touch-action:auto]">
           {filters.map((filter) => {
             if (filter === "Tout") {
               return null;
@@ -350,7 +346,7 @@ export default function MenuExplorer({ sections }: MenuExplorerProps) {
 
       <nav
         aria-label="Sections de la carte"
-        className="sticky top-3 z-20 flex min-w-0 max-w-full gap-3 overflow-x-auto overflow-y-hidden rounded-[1.35rem] bg-[rgba(248,241,232,0.78)] px-2 py-2 text-[11px] uppercase tracking-[0.26em] backdrop-blur-xl [overscroll-behavior-x:contain] [scrollbar-width:none] [-ms-overflow-style:none] sm:static sm:bg-transparent sm:px-0 sm:py-0 sm:backdrop-blur-none"
+        className="sticky top-3 z-20 flex min-w-0 max-w-full gap-2 overflow-x-auto overflow-y-hidden rounded-[1.4rem] bg-[rgba(248,241,232,0.88)] px-2 py-2 text-[11px] uppercase tracking-[0.26em] shadow-[0_2px_16px_rgba(24,17,13,0.07)] backdrop-blur-xl [overscroll-behavior-x:contain] [scroll-snap-type:x_proximity] [scrollbar-width:none] [touch-action:pan-x] [-ms-overflow-style:none] lg:static lg:bg-transparent lg:px-0 lg:py-0 lg:shadow-none lg:backdrop-blur-none"
         ref={categoryNavRef}
       >
         {filteredSections.map((section, index) => (
@@ -361,9 +357,9 @@ export default function MenuExplorer({ sections }: MenuExplorerProps) {
             aria-current={
               currentSectionId === toSectionId(section.title) ? "true" : undefined
             }
-            className={`shrink-0 whitespace-nowrap rounded-full border px-4 py-3 transition duration-300 ${
+            className={`shrink-0 whitespace-nowrap rounded-full border px-4 py-3.5 transition duration-300 [scroll-snap-align:start] lg:py-3 ${
               currentSectionId === toSectionId(section.title)
-                ? "border-[rgba(161,45,39,0.16)] bg-[rgba(161,45,39,0.08)] text-[var(--accent-deep)] shadow-[inset_0_0_0_1px_rgba(161,45,39,0.04)]"
+                ? "border-[rgba(161,45,39,0.2)] bg-[var(--accent)] text-[var(--paper-soft)] shadow-[0_2px_8px_rgba(161,45,39,0.22)]"
                 : "border-[var(--line)] bg-[rgba(248,241,232,0.58)] hover:border-[rgba(24,17,13,0.24)] hover:bg-[rgba(248,241,232,0.88)]"
             }`}
           >
@@ -401,8 +397,22 @@ export default function MenuExplorer({ sections }: MenuExplorerProps) {
               return (
                 <div className="grid min-w-0 gap-6 lg:grid-cols-[0.42fr_0.58fr] lg:gap-16">
                   <div className="min-w-0 lg:sticky lg:top-28 lg:self-start">
+                    {/* Mobile layout: compact inline header */}
+                    <div className="flex items-baseline gap-2.5 lg:hidden">
+                      <span className="shrink-0 text-[11px] uppercase tracking-[0.32em] text-[var(--accent)]">
+                        {String(index + 1).padStart(2, "0")}
+                      </span>
+                      <h3 className="text-[1.75rem] leading-[0.96] tracking-[-0.045em] text-[var(--ink)]">
+                        {section.title}
+                      </h3>
+                    </div>
+                    <p className="mt-2 text-sm leading-6 text-[var(--ink-muted)] lg:hidden">
+                      {section.note}
+                    </p>
+
+                    {/* Desktop layout: full sticky column */}
                     <div
-                      className={`max-w-md transition duration-300 ${
+                      className={`hidden max-w-md transition duration-300 lg:block ${
                         currentSectionId === toSectionId(section.title)
                           ? "opacity-100"
                           : "opacity-[0.92]"
@@ -412,10 +422,10 @@ export default function MenuExplorer({ sections }: MenuExplorerProps) {
                       <h3 className="mt-3 text-[clamp(2rem,9vw,4.5rem)] leading-[0.94] tracking-[-0.05em] text-[var(--ink)]">
                         {section.title}
                       </h3>
-                      <p className="mt-3 text-sm leading-7 text-[var(--ink-muted)] lg:text-[15px] lg:leading-8">
+                      <p className="mt-3 text-[15px] leading-8 text-[var(--ink-muted)]">
                         {section.note}
                       </p>
-                      <p className="mt-4 hidden text-sm leading-7 text-[var(--accent-deep)] lg:block">
+                      <p className="mt-4 text-sm leading-7 text-[var(--accent-deep)]">
                         {section.focus}
                       </p>
                     </div>
@@ -465,7 +475,7 @@ export default function MenuExplorer({ sections }: MenuExplorerProps) {
 
                   <div className="min-w-0">
                     <div className="mb-4 flex min-w-0 flex-wrap items-center gap-2 text-[10px] uppercase tracking-[0.24em] text-[var(--ink-muted)]">
-                      <span>{section.title}</span>
+                      <span className="hidden lg:inline">{section.title}</span>
                       <span className="h-px flex-1 bg-[var(--line)]" />
                       <span>{summary.total} plats</span>
                       <span className="hidden sm:inline">·</span>
