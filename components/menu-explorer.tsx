@@ -37,24 +37,32 @@ function toSectionId(value: string) {
   return value.toLowerCase().replaceAll("&", "and").replaceAll(" ", "-");
 }
 
-function normalizeFilter(value: string | null): ActiveFilter {
-  return value && validFilters.has(value as ActiveFilter)
-    ? (value as ActiveFilter)
-    : "Tout";
+function normalizeFilters(value: string | null): ActiveFilter[] {
+  if (!value) {
+    return [];
+  }
+
+  return value
+    .split(",")
+    .map((entry) => entry.trim())
+    .filter((entry): entry is ActiveFilter => validFilters.has(entry as ActiveFilter))
+    .filter((entry) => entry !== "Tout");
 }
 
 function matchesFilter(
   badges: readonly MenuBadge[] | undefined,
   dietary: readonly DietaryTag[] | undefined,
-  activeFilter: ActiveFilter,
+  activeFilters: readonly ActiveFilter[],
 ) {
-  if (activeFilter === "Tout") {
+  if (activeFilters.length === 0) {
     return true;
   }
 
-  return Boolean(
-    badges?.includes(activeFilter as MenuBadge) ||
-      dietary?.includes(activeFilter as DietaryTag),
+  return activeFilters.every((filter) =>
+    Boolean(
+      badges?.includes(filter as MenuBadge) ||
+        dietary?.includes(filter as DietaryTag),
+    ),
   );
 }
 
@@ -86,21 +94,24 @@ export default function MenuExplorer({ sections }: MenuExplorerProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
   const paramsString = searchParams.toString();
-  const filterFromUrl = normalizeFilter(searchParams.get("filter"));
+  const filtersFromUrl = normalizeFilters(
+    searchParams.get("filters") ?? searchParams.get("filter"),
+  );
   const queryFromUrl = searchParams.get("q") ?? "";
 
-  const [activeFilter, setActiveFilter] = useState<ActiveFilter>(filterFromUrl);
+  const [activeFilters, setActiveFilters] = useState<ActiveFilter[]>(filtersFromUrl);
   const [query, setQuery] = useState(queryFromUrl);
   const [activeSectionId, setActiveSectionId] = useState<string | null>(null);
   const deferredQuery = useDeferredValue(query.trim().toLowerCase());
 
   useEffect(() => {
     const params = new URLSearchParams(paramsString);
+    params.delete("filter");
 
-    if (activeFilter === "Tout") {
-      params.delete("filter");
+    if (activeFilters.length === 0) {
+      params.delete("filters");
     } else {
-      params.set("filter", activeFilter);
+      params.set("filters", activeFilters.join(","));
     }
 
     if (query.trim().length === 0) {
@@ -118,7 +129,7 @@ export default function MenuExplorer({ sections }: MenuExplorerProps) {
     router.replace(nextParams.length > 0 ? `${pathname}?${nextParams}` : pathname, {
       scroll: false,
     });
-  }, [activeFilter, pathname, query, router, paramsString]);
+  }, [activeFilters, pathname, query, router, paramsString]);
 
   const filteredSections = sections
     .map((section) => ({
@@ -141,7 +152,7 @@ export default function MenuExplorer({ sections }: MenuExplorerProps) {
                 .toLowerCase()
                 .includes(deferredQuery);
 
-        return matchesText && matchesFilter(item.badges, item.dietary, activeFilter);
+        return matchesText && matchesFilter(item.badges, item.dietary, activeFilters);
       }),
     }))
     .filter((section) => section.items.length > 0);
@@ -190,7 +201,7 @@ export default function MenuExplorer({ sections }: MenuExplorerProps) {
     (count, section) => count + section.items.length,
     0,
   );
-  const hasActiveControls = activeFilter !== "Tout" || query.trim().length > 0;
+  const hasActiveControls = activeFilters.length > 0 || query.trim().length > 0;
 
   return (
     <div className="grid gap-10">
@@ -201,7 +212,10 @@ export default function MenuExplorer({ sections }: MenuExplorerProps) {
             <h2 className="mt-4 text-[clamp(2.1rem,4.6vw,4.6rem)] leading-[0.94] tracking-[-0.05em] text-[var(--ink)]">
               Cherche vite, filtre clair, choix immédiat.
             </h2>
-            <p className="mt-5 max-w-2xl text-[15px] leading-8 text-[var(--ink-muted)]">
+            <p className="mt-4 max-w-2xl text-sm leading-7 text-[var(--ink-muted)] md:hidden">
+              Va droit aux plats, filtre si besoin, et décide vite.
+            </p>
+            <p className="mt-5 hidden max-w-2xl text-[15px] leading-8 text-[var(--ink-muted)] md:block">
               La carte est courte et claire. Les signatures, les options
               végétariennes et les choix sans gluten se repèrent d’un coup
               d’œil.
@@ -228,9 +242,13 @@ export default function MenuExplorer({ sections }: MenuExplorerProps) {
           </label>
         </div>
 
-        <div className="mt-6 flex flex-wrap gap-2">
+        <div className="-mx-1 mt-6 flex gap-2 overflow-x-auto px-1 pb-1 sm:mx-0 sm:flex-wrap sm:overflow-visible sm:px-0">
           {filters.map((filter) => {
-            const active = filter === activeFilter;
+            if (filter === "Tout") {
+              return null;
+            }
+
+            const active = activeFilters.includes(filter);
 
             return (
               <button
@@ -244,7 +262,11 @@ export default function MenuExplorer({ sections }: MenuExplorerProps) {
                 aria-pressed={active}
                 onClick={() => {
                   startTransition(() => {
-                    setActiveFilter(filter);
+                    setActiveFilters((current) =>
+                      current.includes(filter)
+                        ? current.filter((entry) => entry !== filter)
+                        : [...current, filter],
+                    );
                   });
                 }}
               >
@@ -258,7 +280,7 @@ export default function MenuExplorer({ sections }: MenuExplorerProps) {
               className="menu-filter"
               onClick={() => {
                 startTransition(() => {
-                  setActiveFilter("Tout");
+                  setActiveFilters([]);
                   setQuery("");
                 });
               }}
@@ -276,10 +298,10 @@ export default function MenuExplorer({ sections }: MenuExplorerProps) {
           <span>{visibleItems} plats visibles</span>
           <span className="h-1 w-1 rounded-full bg-[var(--accent)]" />
           <span>{filteredSections.length} sections actives</span>
-          {activeFilter !== "Tout" ? (
+          {activeFilters.length > 0 ? (
             <>
               <span className="h-1 w-1 rounded-full bg-[var(--accent)]" />
-              <span>Filtre actif : {activeFilter}</span>
+              <span>Filtres : {activeFilters.join(" · ")}</span>
             </>
           ) : null}
         </div>
@@ -287,7 +309,7 @@ export default function MenuExplorer({ sections }: MenuExplorerProps) {
 
       <nav
         aria-label="Sections de la carte"
-        className="flex gap-3 overflow-x-auto pb-2 text-[11px] uppercase tracking-[0.26em]"
+        className="sticky top-3 z-20 -mx-2 flex gap-3 overflow-x-auto rounded-[1.35rem] bg-[rgba(248,241,232,0.78)] px-2 py-2 text-[11px] uppercase tracking-[0.26em] backdrop-blur-xl sm:static sm:mx-0 sm:bg-transparent sm:px-0 sm:py-0 sm:backdrop-blur-none"
       >
         {filteredSections.map((section, index) => (
           <a
@@ -334,7 +356,7 @@ export default function MenuExplorer({ sections }: MenuExplorerProps) {
               const summary = getSectionSummary(section);
 
               return (
-                <div className="grid gap-10 lg:grid-cols-[0.42fr_0.58fr] lg:gap-16">
+                <div className="grid gap-6 lg:grid-cols-[0.42fr_0.58fr] lg:gap-16">
                   <div className="lg:sticky lg:top-28 lg:self-start">
                     <div
                       className={`max-w-md transition duration-300 ${
@@ -344,18 +366,18 @@ export default function MenuExplorer({ sections }: MenuExplorerProps) {
                       }`}
                     >
                       <p className="eyebrow">{String(index + 1).padStart(2, "0")}</p>
-                      <h3 className="mt-4 text-[clamp(2.35rem,4.8vw,4.5rem)] leading-[0.94] tracking-[-0.05em] text-[var(--ink)]">
+                      <h3 className="mt-3 text-[clamp(2rem,9vw,4.5rem)] leading-[0.94] tracking-[-0.05em] text-[var(--ink)]">
                         {section.title}
                       </h3>
-                      <p className="mt-5 text-[15px] leading-8 text-[var(--ink-muted)]">
+                      <p className="mt-3 text-sm leading-7 text-[var(--ink-muted)] lg:text-[15px] lg:leading-8">
                         {section.note}
                       </p>
-                      <p className="mt-4 text-sm leading-7 text-[var(--accent-deep)]">
+                      <p className="mt-4 hidden text-sm leading-7 text-[var(--accent-deep)] lg:block">
                         {section.focus}
                       </p>
                     </div>
 
-                    <div className="detail-card mt-8 p-5">
+                    <div className="detail-card mt-8 hidden p-5 lg:block">
                       <p className="text-[11px] uppercase tracking-[0.28em] text-[var(--accent)]">
                         Carte tenue
                       </p>
@@ -387,7 +409,7 @@ export default function MenuExplorer({ sections }: MenuExplorerProps) {
                       </div>
                     </div>
 
-                    <div className="mt-6 max-w-md border-l border-[rgba(161,45,39,0.22)] pl-4">
+                    <div className="mt-6 hidden max-w-md border-l border-[rgba(161,45,39,0.22)] pl-4 lg:block">
                       <p className="text-[10px] uppercase tracking-[0.26em] text-[var(--accent)]">
                         Lecture rapide
                       </p>
@@ -399,14 +421,14 @@ export default function MenuExplorer({ sections }: MenuExplorerProps) {
                   </div>
 
                   <div>
-                    <div className="mb-5 flex flex-wrap items-center gap-3 text-[10px] uppercase tracking-[0.28em] text-[var(--ink-muted)]">
+                    <div className="mb-4 flex flex-wrap items-center gap-2 text-[10px] uppercase tracking-[0.24em] text-[var(--ink-muted)]">
                       <span>{section.title}</span>
                       <span className="h-px flex-1 bg-[var(--line)]" />
                       <span>{summary.total} plats</span>
                       <span className="hidden sm:inline">·</span>
-                      <span>{summary.signatureCount} signatures</span>
+                      <span className="hidden sm:inline">{summary.signatureCount} signatures</span>
                       <span className="hidden sm:inline">·</span>
-                      <span>{summary.highlightCount} repères</span>
+                      <span className="hidden sm:inline">{summary.highlightCount} repères</span>
                     </div>
 
                     {section.items.map((item, itemIndex) => (

@@ -67,7 +67,7 @@ export default function MenuPage() {
         <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(20,15,13,0.22)_0%,rgba(20,15,13,0.16)_36%,rgba(20,15,13,0.9)_100%)]" />
         <SiteHeader light overlay hideBrandLogo />
 
-        <div className="page-shell relative z-10 grid min-h-[88svh] gap-12 pb-12 pt-28 lg:grid-cols-[0.6fr_0.4fr] lg:items-center">
+        <div className="page-shell relative z-10 grid min-h-[88svh] gap-10 pb-10 pt-24 lg:grid-cols-[0.6fr_0.4fr] lg:items-center lg:gap-12 lg:pb-12 lg:pt-28">
           <Reveal>
             <div className="flex flex-wrap gap-2">
               <span className="info-chip">Sans PDF</span>
@@ -103,7 +103,7 @@ export default function MenuPage() {
               <OpenStatus light />
             </div>
 
-            <div className="mt-8 grid gap-4 sm:grid-cols-3">
+            <div className="mt-8 hidden gap-4 sm:grid-cols-3 sm:grid">
               <div className="dark-panel p-5">
                 <p className="text-[2.3rem] leading-none tracking-[-0.06em] text-[var(--paper-soft)]">
                   6
@@ -177,15 +177,15 @@ export default function MenuPage() {
         </div>
       </section>
 
-      <section id="menu-explorer" className="page-shell py-16 lg:py-20">
+      <section id="menu-explorer" className="page-shell py-10 lg:py-20">
         <Suspense fallback={<MenuExplorerFallback />}>
           <MenuExplorer sections={menu} />
         </Suspense>
       </section>
 
       <section className="border-t border-[var(--line)] bg-[rgba(248,241,232,0.46)]">
-        <div className="page-shell grid gap-10 py-20 lg:grid-cols-[0.38fr_0.62fr] lg:gap-16 lg:py-24">
-          <Reveal className="lg:sticky lg:top-28 lg:self-start">
+        <div className="page-shell grid gap-8 py-12 lg:grid-cols-[0.38fr_0.62fr] lg:gap-16 lg:py-24">
+          <Reveal className="hidden lg:sticky lg:top-28 lg:block lg:self-start">
             <div className="overflow-hidden rounded-[2rem] border border-[var(--line)]">
               <Image
                 src={pexelsRamenBowl}
@@ -201,12 +201,12 @@ export default function MenuPage() {
             <h2 className="display-title mt-4 max-w-[9ch]">
               Les détails utiles restent visibles, pas cachés.
             </h2>
-            <p className="mt-6 max-w-2xl text-[15px] leading-8 text-[var(--ink-muted)]">
+            <p className="mt-4 max-w-2xl text-sm leading-7 text-[var(--ink-muted)] lg:mt-6 lg:text-[15px] lg:leading-8">
               Arrivages, options végétariennes, allergènes: on te donne les
               détails qui comptent, sans te noyer. Et tu réserves.
             </p>
 
-            <div className="mt-8 grid gap-4 md:grid-cols-3">
+            <div className="mt-6 grid gap-3 md:grid-cols-3 lg:mt-8 lg:gap-4">
               {restaurant.sourcingNotes.map((note, index) => (
                 <div key={note} className="soft-panel p-5">
                   <p className="text-[11px] uppercase tracking-[0.28em] text-[var(--accent)]">
