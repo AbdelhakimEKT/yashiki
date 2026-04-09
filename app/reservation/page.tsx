@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 
+import AddressActions from "@/components/address-actions";
 import MobileBookingBar from "@/components/mobile-booking-bar";
 import OpenStatus from "@/components/open-status";
 import Reveal from "@/components/reveal";
@@ -66,6 +67,10 @@ export default function ReservationPage() {
                     Écrire à l’équipe
                   </a>
                 </div>
+
+                <div className="mt-5">
+                  <AddressActions />
+                </div>
               </div>
 
               <div className="grid gap-4">
@@ -77,6 +82,9 @@ export default function ReservationPage() {
                   <p className="mt-3 text-sm leading-7 text-[var(--ink-muted)]">
                     {restaurant.addressLine}
                   </p>
+                  <div className="mt-4">
+                    <AddressActions />
+                  </div>
                 </div>
                 <div className="soft-panel p-5">
                   <p className="text-[11px] uppercase tracking-[0.28em] text-[var(--accent)]">
@@ -196,7 +204,7 @@ export default function ReservationPage() {
             {restaurant.faq.map((item, index) => (
               <Reveal key={item.question} delay={`${index * 50}`}>
                 <details className="soft-panel px-6 py-5">
-                  <summary className="cursor-pointer list-none text-lg leading-8 tracking-[-0.02em] text-[var(--ink)] marker:content-none">
+                  <summary className="cursor-pointer list-none rounded-[1rem] text-lg leading-8 tracking-[-0.02em] text-[var(--ink)] transition duration-300 marker:content-none hover:text-[var(--accent-deep)]">
                     {item.question}
                   </summary>
                   <p className="mt-4 text-sm leading-7 text-[var(--ink-muted)]">

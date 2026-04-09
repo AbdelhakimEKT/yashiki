@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+import AddressActions from "@/components/address-actions";
 import SiteBrand from "@/components/site-brand";
 import { restaurant } from "@/data/restaurant";
 
@@ -16,6 +17,9 @@ export default function SiteFooter() {
             {restaurant.cuisine} à {restaurant.city}. Bouillons lents, sushi
             minute, service du soir et table pensée pour revenir souvent.
           </p>
+          <div className="mt-6">
+            <AddressActions light />
+          </div>
           <div className="mt-8 flex flex-wrap gap-2">
             {restaurant.guestHighlights.map((highlight) => (
               <span
@@ -34,10 +38,10 @@ export default function SiteFooter() {
               Explorer
             </p>
             <div className="mt-4 grid gap-3 text-sm leading-7 text-[rgba(248,241,232,0.72)]">
-              <Link href="/">Accueil</Link>
-              <Link href={restaurant.maisonPath}>La maison</Link>
-              <Link href={restaurant.menuPath}>Carte</Link>
-              <Link href={restaurant.reservationPath}>Réservation</Link>
+              <Link className="transition duration-300 hover:text-[var(--paper-soft)]" href="/">Accueil</Link>
+              <Link className="transition duration-300 hover:text-[var(--paper-soft)]" href={restaurant.maisonPath}>La maison</Link>
+              <Link className="transition duration-300 hover:text-[var(--paper-soft)]" href={restaurant.menuPath}>Carte</Link>
+              <Link className="transition duration-300 hover:text-[var(--paper-soft)]" href={restaurant.reservationPath}>Réservation</Link>
             </div>
           </div>
 
@@ -47,9 +51,9 @@ export default function SiteFooter() {
             </p>
             <div className="mt-4 grid gap-3 text-sm leading-7 text-[rgba(248,241,232,0.72)]">
               <p>{restaurant.addressLine}</p>
-              <a href={restaurant.phoneHref}>{restaurant.phoneDisplay}</a>
-              <a href={restaurant.emailHref}>{restaurant.email}</a>
-              <a href={restaurant.googleMapsHref} target="_blank" rel="noreferrer">
+              <a className="transition duration-300 hover:text-[var(--paper-soft)]" href={restaurant.phoneHref}>{restaurant.phoneDisplay}</a>
+              <a className="transition duration-300 hover:text-[var(--paper-soft)]" href={restaurant.emailHref}>{restaurant.email}</a>
+              <a className="transition duration-300 hover:text-[var(--paper-soft)]" href={restaurant.googleMapsHref} target="_blank" rel="noreferrer">
                 Ouvrir dans Google Maps
               </a>
             </div>

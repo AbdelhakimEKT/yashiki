@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 
+import BackToTopButton from "@/components/back-to-top-button";
 import RestaurantSchema from "@/components/restaurant-schema";
 import pexelsJapaneseInterior from "@/imagee/pexels-japanese-interior.jpg";
 
@@ -71,6 +72,7 @@ export default function RootLayout({
         </a>
         <RestaurantSchema />
         {children}
+        <BackToTopButton />
       </body>
     </html>
   );

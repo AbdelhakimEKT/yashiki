@@ -19,7 +19,7 @@ import { restaurant } from "@/data/restaurant";
 export const metadata: Metadata = {
   title: "Carte",
   description:
-    "La carte du soir de Yashiki à Paris, pensée pour être lisible, filtrable et réservée sans friction.",
+    "La carte du soir de Yashiki à Paris: ramen, sushi et assiettes choisies. Réservation en un geste.",
 };
 
 function MenuExplorerFallback() {
@@ -82,9 +82,9 @@ export default function MenuPage() {
               Une carte courte qui donne envie avant même de choisir.
             </h1>
             <p className="mt-6 max-w-2xl text-[16px] leading-8 text-[rgba(248,241,232,0.82)]">
-              Les sections sont nettes, les repères tombent tout de suite et
-              les plats forts ressortent sans bruit. L’idée n’est pas de tout
-              montrer. C’est d’aider à décider vite et bien.
+              Des sections nettes, des plats qui ressortent. Pas besoin de lire
+              longtemps pour savoir ce qu’on veut. L’idée n’est pas de tout
+              montrer, juste de donner envie et de guider.
             </p>
 
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
@@ -150,8 +150,7 @@ export default function MenuPage() {
                     Une lecture claire du poisson et du geste.
                   </h2>
                   <p className="mt-4 max-w-[20rem] text-sm leading-7 text-[rgba(248,241,232,0.8)]">
-                    Plus de matière, moins d’effet. C’est ce niveau de
-                    précision que la carte doit transmettre.
+                    Du produit, du geste, du calme. Rien de trop.
                   </p>
                 </div>
               </div>
@@ -203,9 +202,8 @@ export default function MenuPage() {
               Les détails utiles restent visibles, pas cachés.
             </h2>
             <p className="mt-6 max-w-2xl text-[15px] leading-8 text-[var(--ink-muted)]">
-              Le public français attend de la lisibilité. Le public japonais
-              valorise les détails et la précision. Cette carte marie les deux:
-              elle respire, mais elle dit l’essentiel avant validation.
+              Arrivages, options végétariennes, allergènes: on te donne les
+              détails qui comptent, sans te noyer. Et tu réserves.
             </p>
 
             <div className="mt-8 grid gap-4 md:grid-cols-3">
@@ -232,9 +230,8 @@ export default function MenuPage() {
               Choisis pendant que le goût est encore en tête.
             </h2>
             <p className="mt-6 max-w-xl text-[15px] leading-8 text-[var(--ink-muted)]">
-              La carte est faite pour aider à décider vite. Il reste à bloquer
-              le créneau, appeler en un geste ou passer par la page de
-              réservation.
+              Si l’envie est là, bloque un créneau. Le reste se règle vite:
+              appel, réservation en ligne, ou un message.
             </p>
           </Reveal>
 

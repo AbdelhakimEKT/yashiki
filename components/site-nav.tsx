@@ -25,7 +25,9 @@ export default function SiteNav({ light = false }: SiteNavProps) {
     ? "border border-[rgba(248,241,232,0.16)] bg-[rgba(20,15,13,0.42)] text-[rgba(248,241,232,0.94)] shadow-[0_18px_40px_rgba(0,0,0,0.2)]"
     : "border border-[var(--line)] bg-[rgba(248,241,232,0.8)] text-[var(--ink-muted)]";
 
-  const hover = light ? "hover:text-white" : "hover:text-[var(--ink)]";
+  const hover = light
+    ? "hover:bg-[rgba(248,241,232,0.08)] hover:text-white"
+    : "hover:bg-[rgba(24,17,13,0.04)] hover:text-[var(--ink)]";
 
   const mobileShell = light
     ? "border border-[rgba(248,241,232,0.16)] bg-[rgba(20,15,13,0.88)] text-[rgba(248,241,232,0.94)]"
@@ -59,11 +61,11 @@ export default function SiteNav({ light = false }: SiteNavProps) {
               key={link.href}
               href={link.href}
               aria-current={active ? "page" : undefined}
-              className={`rounded-full px-4 py-2 transition ${hover} ${
+              className={`rounded-full px-4 py-2 transition duration-300 ${hover} ${
                 active
                   ? light
-                    ? "bg-[rgba(248,241,232,0.12)] text-white"
-                    : "bg-[rgba(24,17,13,0.06)] text-[var(--ink)]"
+                    ? "border border-[rgba(248,241,232,0.18)] bg-[rgba(248,241,232,0.12)] text-white shadow-[inset_0_0_0_1px_rgba(248,241,232,0.06)]"
+                    : "border border-[rgba(24,17,13,0.08)] bg-[rgba(24,17,13,0.06)] text-[var(--ink)] shadow-[inset_0_0_0_1px_rgba(24,17,13,0.02)]"
                   : link.primary
                     ? light
                       ? "bg-[rgba(248,241,232,0.94)] !text-[var(--night)]"
@@ -94,16 +96,15 @@ export default function SiteNav({ light = false }: SiteNavProps) {
                   key={link.href}
                   href={link.href}
                   aria-current={active ? "page" : undefined}
-                  className={`rounded-[1rem] px-4 py-3 text-[11px] uppercase tracking-[0.24em] transition ${
+                  className={`rounded-[1rem] border px-4 py-3 text-[11px] uppercase tracking-[0.24em] transition duration-300 ${
                     active
-                      ? "bg-[rgba(255,255,255,0.1)]"
+                      ? "border-current/10 bg-[rgba(255,255,255,0.1)]"
                       : link.primary
                         ? light
                           ? "bg-[rgba(248,241,232,0.94)] !text-[var(--night)]"
                           : "bg-[var(--accent)] !text-[var(--paper-soft)]"
-                        : "hover:bg-[rgba(255,255,255,0.08)]"
+                        : "border-transparent hover:bg-[rgba(255,255,255,0.08)]"
                   }`}
-                  onClick={() => setOpen(false)}
                 >
                   {link.label}
                 </Link>

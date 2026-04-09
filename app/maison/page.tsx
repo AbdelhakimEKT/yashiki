@@ -35,7 +35,7 @@ const spaceNotes = [
   {
     title: "Rythme clair",
     copy:
-      "Le parcours digital et le service réel suivent la même logique: peu de friction, beaucoup d’assurance.",
+      "Du premier clic à la table: même rythme, même calme, même précision.",
   },
 ];
 
@@ -66,9 +66,8 @@ export default function MaisonPage() {
               L’ambiance n’est pas un décor. C’est une promesse tenue.
             </h1>
             <p className="mt-6 max-w-2xl text-[16px] leading-8 text-[rgba(248,241,232,0.82)]">
-              Un restaurant japonais haut de gamme se raconte par la lumière,
-              le rythme, la précision du geste et la manière dont le visiteur
-              comprend l’endroit avant même d’y entrer.
+              Bois, lumière, rythme. Le geste au comptoir. Et un service qui
+              tient la table jusqu’au dernier bol.
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <Link href={restaurant.reservationPath} className="cta-primary">
@@ -103,8 +102,7 @@ export default function MaisonPage() {
                   <OpenStatus light />
                 </div>
                 <p className="mt-5 text-sm leading-7 text-[rgba(248,241,232,0.78)]">
-                  Le site et le lieu racontent la même chose: un Japon chaleureux,
-                  structuré et lisible pour un public parisien.
+                  Même esprit que la salle: chaleureux, précis, sans chichi.
                 </p>
               </div>
             </div>
@@ -271,8 +269,8 @@ export default function MaisonPage() {
               Le lieu est clair. Il reste à choisir le service.
             </h2>
             <p className="mt-6 max-w-xl text-[15px] leading-8 text-[var(--ink-muted)]">
-              L’expérience continue avec une réservation simple, des horaires
-              visibles et un accès direct au téléphone si tu veux aller vite.
+              On réserve simplement, on voit les horaires, et on appelle si on
+              veut aller vite.
             </p>
           </Reveal>
 

@@ -91,6 +91,7 @@ export default function MenuExplorer({ sections }: MenuExplorerProps) {
 
   const [activeFilter, setActiveFilter] = useState<ActiveFilter>(filterFromUrl);
   const [query, setQuery] = useState(queryFromUrl);
+  const [activeSectionId, setActiveSectionId] = useState<string | null>(null);
   const deferredQuery = useDeferredValue(query.trim().toLowerCase());
 
   useEffect(() => {
@@ -145,10 +146,51 @@ export default function MenuExplorer({ sections }: MenuExplorerProps) {
     }))
     .filter((section) => section.items.length > 0);
 
+  const sectionIds = filteredSections.map((section) => toSectionId(section.title));
+  const currentSectionId =
+    activeSectionId && sectionIds.includes(activeSectionId)
+      ? activeSectionId
+      : sectionIds[0] ?? null;
+
+  useEffect(() => {
+    if (sectionIds.length === 0) {
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const currentSection = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((first, second) => second.intersectionRatio - first.intersectionRatio)[0];
+
+        if (currentSection?.target.id) {
+          setActiveSectionId(currentSection.target.id);
+        }
+      },
+      {
+        rootMargin: "-20% 0px -55% 0px",
+        threshold: [0.2, 0.35, 0.6],
+      },
+    );
+
+    sectionIds.forEach((id) => {
+      const section = document.getElementById(id);
+
+      if (section) {
+        observer.observe(section);
+      }
+    });
+
+    return () => {
+      observer.disconnect();
+    };
+  }, [sectionIds]);
+
   const visibleItems = filteredSections.reduce(
     (count, section) => count + section.items.length,
     0,
   );
+  const hasActiveControls = activeFilter !== "Tout" || query.trim().length > 0;
 
   return (
     <div className="grid gap-10">
@@ -160,9 +202,9 @@ export default function MenuExplorer({ sections }: MenuExplorerProps) {
               Cherche vite, filtre clair, choix immédiat.
             </h2>
             <p className="mt-5 max-w-2xl text-[15px] leading-8 text-[var(--ink-muted)]">
-              La carte reste lisible sur mobile, sans PDF ni détour. Les plats
-              signatures, les options végétariennes et les choix sans gluten
-              ressortent en un geste.
+              La carte est courte et claire. Les signatures, les options
+              végétariennes et les choix sans gluten se repèrent d’un coup
+              d’œil.
             </p>
           </div>
 
@@ -210,6 +252,20 @@ export default function MenuExplorer({ sections }: MenuExplorerProps) {
               </button>
             );
           })}
+          {hasActiveControls ? (
+            <button
+              type="button"
+              className="menu-filter"
+              onClick={() => {
+                startTransition(() => {
+                  setActiveFilter("Tout");
+                  setQuery("");
+                });
+              }}
+            >
+              Réinitialiser
+            </button>
+          ) : null}
         </div>
 
         <div
@@ -237,7 +293,14 @@ export default function MenuExplorer({ sections }: MenuExplorerProps) {
           <a
             key={section.title}
             href={`#${toSectionId(section.title)}`}
-            className="shrink-0 rounded-full border border-[var(--line)] bg-[rgba(248,241,232,0.58)] px-4 py-3 transition duration-300 hover:border-[rgba(24,17,13,0.24)] hover:bg-[rgba(248,241,232,0.88)]"
+            aria-current={
+              currentSectionId === toSectionId(section.title) ? "true" : undefined
+            }
+            className={`shrink-0 rounded-full border px-4 py-3 transition duration-300 ${
+              currentSectionId === toSectionId(section.title)
+                ? "border-[rgba(161,45,39,0.16)] bg-[rgba(161,45,39,0.08)] text-[var(--accent-deep)] shadow-[inset_0_0_0_1px_rgba(161,45,39,0.04)]"
+                : "border-[var(--line)] bg-[rgba(248,241,232,0.58)] hover:border-[rgba(24,17,13,0.24)] hover:bg-[rgba(248,241,232,0.88)]"
+            }`}
           >
             {String(index + 1).padStart(2, "0")} · {section.title}
           </a>
@@ -260,6 +323,7 @@ export default function MenuExplorer({ sections }: MenuExplorerProps) {
           <section
             key={section.title}
             id={toSectionId(section.title)}
+            data-active={currentSectionId === toSectionId(section.title)}
             className={`section-visibility border-t border-[var(--line)] pt-10 first:border-t-0 first:pt-0 ${
               index % 2 === 0
                 ? "bg-[linear-gradient(90deg,rgba(248,241,232,0.42)_0%,rgba(248,241,232,0.1)_55%,transparent_100%)]"
@@ -272,7 +336,13 @@ export default function MenuExplorer({ sections }: MenuExplorerProps) {
               return (
                 <div className="grid gap-10 lg:grid-cols-[0.42fr_0.58fr] lg:gap-16">
                   <div className="lg:sticky lg:top-28 lg:self-start">
-                    <div className="max-w-md">
+                    <div
+                      className={`max-w-md transition duration-300 ${
+                        currentSectionId === toSectionId(section.title)
+                          ? "opacity-100"
+                          : "opacity-[0.92]"
+                      }`}
+                    >
                       <p className="eyebrow">{String(index + 1).padStart(2, "0")}</p>
                       <h3 className="mt-4 text-[clamp(2.35rem,4.8vw,4.5rem)] leading-[0.94] tracking-[-0.05em] text-[var(--ink)]">
                         {section.title}
@@ -322,8 +392,8 @@ export default function MenuExplorer({ sections }: MenuExplorerProps) {
                         Lecture rapide
                       </p>
                       <p className="mt-2 text-sm leading-7 text-[var(--ink-muted)]">
-                        Une carte courte, mais structurée pour montrer vite les
-                        plats qu’on retient.
+                        Quelques plats, bien choisis. On repère vite ce qu’on
+                        vient chercher.
                       </p>
                     </div>
                   </div>

@@ -145,7 +145,7 @@ export const restaurant = {
   experiencePillars: [
     {
       title: "Coupe minute",
-      copy: "Les pièces partent quand le riz, le geste et la température sont au bon niveau.",
+      copy: "Les pièces partent quand le riz est tiède et que la coupe est juste.",
     },
     {
       title: "Bouillon long",
@@ -153,17 +153,17 @@ export const restaurant = {
     },
     {
       title: "Salle lisible",
-      copy: "Lumière chaude, circulation simple, repères clairs et réservation facile sur mobile.",
+      copy: "Lumière chaude, circulation simple, et un service qui reste calme.",
     },
   ],
   storytelling: [
-    "Yashiki a été pensé comme une maison de nuit: un restaurant japonais qui donne faim en un regard, puis rassure par la clarté de sa carte et la précision du service.",
-    "L’esthétique puise dans le Japon des comptoirs, des matières et des gestes. La structure, elle, reste pensée pour un public français: plus d’air, plus de repères, plus de lisibilité à chaque étape.",
+    "Yashiki a été pensé comme une maison de nuit: un restaurant japonais qui donne faim en un regard, puis tient la promesse à table.",
+    "On y retrouve le Japon des comptoirs, des matières et des gestes. Le reste est simple: une salle tenue, une carte courte, un service précis.",
   ],
   sourcingNotes: [
-    "Poissons selon arrivage et détails d’ingrédients donnés avant validation.",
-    "Options végétariennes visibles sur la carte plutôt que cachées dans un PDF.",
-    "Allergènes, groupes et demandes particulières traités dès la réservation.",
+    "Poissons selon arrivage, et détails donnés au bon moment.",
+    "Options végétariennes visibles, sans avoir à chercher.",
+    "Allergènes, groupes et demandes particulières gérés dès la réservation.",
   ],
   guestHighlights: [
     "Salle calme",
@@ -175,7 +175,7 @@ export const restaurant = {
       name: "Camille R.",
       source: "Google",
       quote:
-        "Adresse calme, service net et vrai plaisir sur le comptoir. On réserve surtout pour la régularité.",
+        "Adresse calme, service net et vrai plaisir au comptoir. On réserve surtout pour la régularité.",
     },
     {
       name: "Nathan B.",
@@ -187,7 +187,7 @@ export const restaurant = {
       name: "Sarah T.",
       source: "Google",
       quote:
-        "Le site donne envie, mais la salle tient la promesse: précise, chaleureuse et simple à réserver.",
+        "Le site donne envie, et la salle tient la promesse: précise, chaleureuse, simple à réserver.",
     },
   ],
   reservationSteps: [
@@ -208,7 +208,7 @@ export const restaurant = {
     {
       question: "Faut-il réserver ?",
       answer:
-        "Oui, surtout pour le service du soir du jeudi au samedi. Les places au comptoir partent aussi rapidement.",
+        "Oui, surtout le soir du jeudi au samedi. Les places au comptoir partent vite.",
     },
     {
       question: "Avez-vous des options végétariennes ?",
@@ -218,12 +218,12 @@ export const restaurant = {
     {
       question: "Peut-on venir en groupe ?",
       answer:
-        "Oui, mais mieux vaut écrire ou appeler en amont pour que l'équipe puisse organiser la table dans de bonnes conditions.",
+        "Oui. Écris ou appelle en amont: on prépare la table dans de bonnes conditions.",
     },
     {
       question: "Comment signaler une allergie ou une contrainte alimentaire ?",
       answer:
-        "Le plus efficace est de le préciser au moment de la réservation, puis de le rappeler à l'arrivée en salle.",
+        "Précise-le au moment de la réservation, puis rappelle-le à l’arrivée.",
     },
     {
       question: "Avez-vous des options sans gluten ?",

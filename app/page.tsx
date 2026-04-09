@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 
+import AddressActions from "@/components/address-actions";
 import MobileBookingBar from "@/components/mobile-booking-bar";
 import OpenStatus from "@/components/open-status";
 import Reveal from "@/components/reveal";
@@ -97,9 +98,9 @@ export default function Home() {
               Le Marais passe en mode nuit japonaise.
             </h1>
             <p className="copy-large mt-6 max-w-[38rem] text-[rgba(248,241,232,0.84)]">
-              Un site de restaurant ne doit pas seulement informer. Il doit
-              donner faim, faire sentir le lieu et rendre la réservation
-              immédiate. Chez Yashiki, tout est organisé pour ça.
+              Une salle qui tient la nuit, un comptoir qui vit, une cuisine
+              précise. On vient pour le geste, on reste pour le rythme. Et on
+              réserve sans réfléchir.
             </p>
 
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
@@ -151,11 +152,11 @@ export default function Home() {
                     Première impression
                   </p>
                   <h2 className="mt-3 text-[clamp(2rem,4vw,3rem)] leading-[0.92] tracking-[-0.05em] text-[var(--paper-soft)]">
-                    Une photo qui ouvre l’appétit avant le scroll.
+                    Une photo. Et on a déjà faim.
                   </h2>
                   <p className="mt-4 text-sm leading-7 text-[rgba(248,241,232,0.78)]">
-                    Le design pose le désir. La carte et la réservation suivent
-                    sans friction.
+                    L’envie vient d’abord. La carte et la réservation suivent,
+                    simplement.
                   </p>
                 </div>
               </article>
@@ -172,8 +173,8 @@ export default function Home() {
               Une carte courte. Une envie nette.
             </h2>
             <p className="mt-6 max-w-md text-[15px] leading-8 text-[var(--ink-muted)]">
-              Les bons restaurants ne noient pas le visiteur. Ils hiérarchisent
-              vite, montrent les plats mémorables et laissent le reste respirer.
+              On va à l’essentiel: quelques plats qui tiennent la maison. Le
+              reste suit, sans bruit.
             </p>
             <div className="mt-8">
               <Link href={restaurant.menuPath} className="cta-primary">
@@ -234,8 +235,8 @@ export default function Home() {
               4,8
             </p>
             <p className="mt-4 max-w-sm text-[15px] leading-8 text-[rgba(248,241,232,0.72)]">
-              Quand le lieu, la cuisine et la lisibilité du parcours travaillent
-              ensemble, la confiance monte avant même l’arrivée en salle.
+              Quand la salle, l’assiette et le service vont dans le même sens,
+              la confiance arrive vite.
             </p>
 
             <div className="mt-10 grid gap-4">
@@ -401,8 +402,8 @@ export default function Home() {
               Toutes les infos utiles sont au bon endroit.
             </h2>
             <p className="mt-6 max-w-md text-[15px] leading-8 text-[var(--ink-muted)]">
-              Adresse, téléphone, horaires, carte et réservation restent
-              visibles en permanence. Rien n’oblige à chercher.
+              Adresse, téléphone, horaires, carte, réservation: tout est là. Pas
+              besoin de fouiller.
             </p>
 
             <div className="mt-8">
@@ -442,6 +443,10 @@ export default function Home() {
                 Appeler le restaurant
               </a>
             </div>
+
+            <div className="mt-5">
+              <AddressActions />
+            </div>
           </Reveal>
         </div>
       </section>
@@ -454,9 +459,8 @@ export default function Home() {
               Les réponses qu’on cherche souvent avant de réserver.
             </h2>
             <p className="mt-6 max-w-md text-[15px] leading-8 text-[var(--ink-muted)]">
-              Ces réponses sont écrites comme au téléphone: courtes, directes
-              et faciles à lire sur mobile. C’est mieux pour les visiteurs
-              pressés, la recherche vocale et la prise de décision.
+              Des réponses simples, comme au téléphone: courtes, directes,
+              lisibles sur mobile.
             </p>
           </Reveal>
 
@@ -496,8 +500,8 @@ export default function Home() {
               La bonne table se bloque avant que l’envie redescende.
             </h2>
             <p className="mt-6 max-w-2xl text-[15px] leading-8 text-[rgba(248,241,232,0.76)]">
-              Tu as vu l’ambiance, la carte et le comptoir. Il reste à choisir
-              le service, appeler en un geste ou passer par la page dédiée.
+              Tu as vu la salle, la carte, le comptoir. Il reste à choisir le
+              service, appeler, ou réserver en ligne.
             </p>
 
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
