@@ -10,7 +10,7 @@ export default function SiteFooter() {
       className="border-t border-[rgba(248,241,232,0.12)] bg-[var(--night)]"
       style={{ color: "rgb(248, 241, 232)" }}
     >
-      <div className="page-shell grid gap-12 pb-28 pt-12 md:pb-12 lg:grid-cols-[1.1fr_0.9fr]">
+      <div className="page-shell grid gap-12 pb-28 pt-12 md:pb-16 lg:grid-cols-[1.1fr_0.9fr]">
         <div>
           <SiteBrand light />
           <p className="mt-6 max-w-md text-sm leading-7 text-[rgba(248,241,232,0.72)]">
@@ -73,6 +73,17 @@ export default function SiteFooter() {
               <p className="pt-2 text-[var(--paper-soft)]">{restaurant.reservationsLabel}</p>
             </div>
           </div>
+        </div>
+      </div>
+
+      <div className="border-t border-[rgba(248,241,232,0.08)]">
+        <div className="page-shell flex flex-col gap-3 py-6 sm:flex-row sm:items-center sm:justify-between">
+          <p className="text-[10px] uppercase tracking-[0.26em] text-[rgba(248,241,232,0.36)]">
+            © {new Date().getFullYear()} Yashiki Paris — Tous droits réservés
+          </p>
+          <p className="text-[10px] uppercase tracking-[0.26em] text-[rgba(248,241,232,0.36)]">
+            {restaurant.addressLine}
+          </p>
         </div>
       </div>
     </footer>

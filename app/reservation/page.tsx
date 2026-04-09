@@ -84,9 +84,6 @@ export default function ReservationPage() {
                   <p className="mt-3 text-sm leading-7 text-[var(--ink-muted)]">
                     {restaurant.addressLine}
                   </p>
-                  <div className="mt-4">
-                    <AddressActions />
-                  </div>
                 </div>
                 <div className="soft-panel p-5">
                   <p className="text-[11px] uppercase tracking-[0.28em] text-[var(--accent)]">
@@ -206,7 +203,7 @@ export default function ReservationPage() {
             {restaurant.faq.map((item, index) => (
               <Reveal key={item.question} delay={`${index * 50}`}>
                 <details className="soft-panel px-6 py-5">
-                  <summary className="cursor-pointer list-none rounded-[1rem] text-lg leading-8 tracking-[-0.02em] text-[var(--ink)] transition duration-300 marker:content-none hover:text-[var(--accent-deep)]">
+                  <summary className="cursor-pointer list-none pr-8 text-lg leading-8 tracking-[-0.02em] text-[var(--ink)] transition duration-300 marker:content-none hover:text-[var(--accent-deep)]">
                     {item.question}
                   </summary>
                   <p className="mt-4 text-sm leading-7 text-[var(--ink-muted)]">
@@ -231,7 +228,7 @@ export default function ReservationPage() {
           <Reveal delay="80">
             <div className="flex flex-col gap-3 sm:flex-row sm:justify-end">
               <a href={restaurant.phoneHref} className="cta-primary">
-                {restaurant.phoneDisplay}
+                Appeler maintenant
               </a>
               <Link href={restaurant.menuPath} className="cta-secondary">
                 Revenir à la carte

@@ -168,6 +168,82 @@ body::before {
   }
 }
 
+@keyframes nav-slide-down {
+  from {
+    opacity: 0;
+    transform: translate3d(0, -10px, 0) scale(0.97);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes details-open {
+  from {
+    opacity: 0;
+    transform: translate3d(0, -6px, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes lightbox-in {
+  from {
+    opacity: 0;
+    transform: scale(0.96) translate3d(0, 12px, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1) translate3d(0, 0, 0);
+  }
+}
+
+@keyframes lightbox-backdrop-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+details > :not(summary) {
+  animation: details-open 220ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+details summary {
+  position: relative;
+}
+
+details summary::-webkit-details-marker {
+  display: none;
+}
+
+details summary::after {
+  content: "+";
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.25rem;
+  line-height: 1;
+  color: var(--ink-muted);
+  transition: color 200ms ease;
+  pointer-events: none;
+}
+
+details[open] summary::after {
+  content: "−";
+  color: var(--accent);
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -228,10 +304,12 @@ body::before {
     background: var(--accent);
     color: var(--paper-soft) !important;
     box-shadow: 0 14px 30px rgba(119, 23, 22, 0.12);
+    touch-action: manipulation;
   }
 
   .cta-primary:hover {
     background: var(--accent-deep);
+    box-shadow: 0 18px 36px rgba(119, 23, 22, 0.18);
     transform: translate3d(0, -1px, 0);
   }
 
@@ -240,6 +318,7 @@ body::before {
     border-color: var(--line);
     background: rgba(248, 241, 232, 0.44);
     color: var(--ink) !important;
+    touch-action: manipulation;
   }
 
   .cta-secondary:hover {
@@ -322,6 +401,7 @@ body::before {
     border-color: var(--line);
     background: rgba(248, 241, 232, 0.6);
     white-space: nowrap;
+    touch-action: manipulation;
   }
 
   .menu-filter:hover {
@@ -449,6 +529,7 @@ body::before {
   .mobile-sticky-primary,
   .mobile-sticky-secondary {
     @apply inline-flex items-center justify-center rounded-full px-4 py-3 text-[10px] uppercase tracking-[0.24em] transition duration-300;
+    touch-action: manipulation;
   }
 
   .mobile-sticky-primary {
@@ -478,7 +559,7 @@ body::before {
   }
 
   .back-to-top {
-    @apply fixed z-40 inline-flex h-11 w-11 items-center justify-center rounded-full border text-sm transition duration-300;
+    @apply fixed z-40 inline-flex h-11 w-11 items-center justify-center rounded-full border text-sm;
     right: 1rem;
     bottom: calc(4.8rem + env(safe-area-inset-bottom));
     border-color: rgba(24, 17, 13, 0.1);
@@ -486,12 +567,13 @@ body::before {
     color: var(--ink);
     box-shadow: 0 18px 36px rgba(24, 17, 13, 0.12);
     backdrop-filter: blur(18px);
+    transition: transform 300ms cubic-bezier(0.22, 1, 0.36, 1), background-color 200ms ease, border-color 200ms ease, opacity 300ms ease;
   }
 
   .back-to-top:hover {
     border-color: rgba(24, 17, 13, 0.2);
     background: rgba(248, 241, 232, 0.96);
-    transform: translate3d(0, -1px, 0);
+    transform: translate3d(0, -2px, 0);
   }
 
   @media (min-width: 768px) {

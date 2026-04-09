@@ -19,7 +19,9 @@ import pexelsLanternChef from "@/imagee/pexels-lantern-chef.jpg";
 import { restaurant } from "@/data/restaurant";
 
 export const metadata: Metadata = {
-  title: "Accueil",
+  title: {
+    absolute: "Yashiki Paris — Restaurant japonais contemporain, Le Marais",
+  },
 };
 
 const signatureStories = [
@@ -230,7 +232,7 @@ export default function Home() {
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_left,rgba(161,45,39,0.16),transparent_34%)]" />
         <div className="page-shell relative z-10 grid gap-12 py-24 lg:grid-cols-[0.42fr_0.58fr] lg:py-28">
           <Reveal>
-            <p className="eyebrow !text-[rgba(248,241,232,0.64)]">Preuves sociales</p>
+            <p className="eyebrow !text-[rgba(248,241,232,0.64)]">Ce qu'ils disent</p>
             <p className="mt-4 text-[clamp(4.4rem,10vw,8rem)] leading-none tracking-[-0.08em] text-[var(--paper-soft)]">
               4,8
             </p>
@@ -322,8 +324,8 @@ export default function Home() {
                       Ambiance
                     </p>
                     <p className="mt-3 max-w-[16rem] text-sm leading-7 text-[rgba(248,241,232,0.88)]">
-                      Le Japon dans les matières et le geste. La France dans la
-                      le rythme et l’accueil.
+                      Le Japon dans les matières et le geste. La France dans le
+                      rythme et l’accueil.
                     </p>
                   </div>
                 </div>

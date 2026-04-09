@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { restaurant } from "@/data/restaurant";
 
@@ -20,6 +20,24 @@ const links = [
 export default function SiteNav({ light = false }: SiteNavProps) {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
+  const wrapperRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    setOpen(false);
+  }, [pathname]);
+
+  useEffect(() => {
+    if (!open) return;
+
+    const handleClickOutside = (event: MouseEvent) => {
+      if (wrapperRef.current && !wrapperRef.current.contains(event.target as Node)) {
+        setOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [open]);
 
   const shell = light
     ? "border border-[rgba(248,241,232,0.16)] bg-[rgba(20,15,13,0.42)] text-[rgba(248,241,232,0.94)] shadow-[0_18px_40px_rgba(0,0,0,0.2)]"
@@ -34,7 +52,7 @@ export default function SiteNav({ light = false }: SiteNavProps) {
     : "border border-[var(--line)] bg-[rgba(248,241,232,0.98)] text-[var(--ink)]";
 
   return (
-    <div className="relative">
+    <div className="relative" ref={wrapperRef}>
       <button
         type="button"
         className={`inline-flex items-center gap-3 rounded-full px-4 py-3 text-[11px] uppercase tracking-[0.28em] backdrop-blur-md transition md:hidden ${shell}`}
@@ -82,7 +100,8 @@ export default function SiteNav({ light = false }: SiteNavProps) {
       {open ? (
         <div
           id="site-mobile-nav"
-          className={`absolute right-0 top-[calc(100%+12px)] z-40 w-[min(18rem,calc(100vw-2rem))] rounded-[1.5rem] p-3 shadow-[0_24px_60px_rgba(26,20,16,0.18)] backdrop-blur-xl md:hidden ${mobileShell}`}
+          className={`absolute right-0 top-[calc(100%+12px)] z-40 w-[min(18rem,calc(100vw-2rem))] animate-[nav-slide-down_180ms_cubic-bezier(0.22,1,0.36,1)_forwards] rounded-[1.5rem] p-3 shadow-[0_24px_60px_rgba(26,20,16,0.18)] backdrop-blur-xl md:hidden ${mobileShell}`}
+          role="menu"
         >
           <p className="px-3 pb-2 text-[10px] uppercase tracking-[0.32em] text-current/60">
             Navigation
@@ -95,7 +114,9 @@ export default function SiteNav({ light = false }: SiteNavProps) {
                 <Link
                   key={link.href}
                   href={link.href}
+                  role="menuitem"
                   aria-current={active ? "page" : undefined}
+                  onClick={() => setOpen(false)}
                   className={`rounded-[1rem] border px-4 py-3 text-[11px] uppercase tracking-[0.24em] transition duration-300 ${
                     active
                       ? "border-current/10 bg-[rgba(255,255,255,0.1)]"

@@ -31,33 +31,13 @@ export default function MobileBookingBar() {
       return null;
     }
 
-    if (pathname === restaurant.reservationPath) {
-      return {
-        primaryLabel: "Appeler",
-        primaryHref: restaurant.phoneHref,
-        primaryLink: false,
-        secondaryLabel: "Itinéraire",
-        secondaryHref: restaurant.googleMapsHref,
-      };
-    }
-
-    if (pathname === restaurant.maisonPath || pathname === "/") {
-      return {
-        primaryLabel: "Réserver",
-        primaryHref: restaurant.reservationPath,
-        primaryLink: true,
-        secondaryLabel: "Appeler",
-        secondaryHref: restaurant.phoneHref,
-      };
-    }
-
     return {
       primaryLabel: "Réserver",
       primaryHref: restaurant.reservationPath,
       primaryLink: true,
       secondaryLabel: "Appeler",
       secondaryHref: restaurant.phoneHref,
-      };
+    };
   }, [pathname]);
 
   if (!actions) {

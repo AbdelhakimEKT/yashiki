@@ -70,14 +70,14 @@ export default function MenuItemLightbox({
 
       {open ? (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-[rgba(20,15,13,0.88)] p-5 backdrop-blur-md [overscroll-behavior:contain]"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-[rgba(20,15,13,0.88)] p-5 backdrop-blur-md [animation:lightbox-backdrop-in_180ms_ease_forwards] [overscroll-behavior:contain]"
           role="dialog"
           aria-modal="true"
           aria-label={alt}
           onClick={() => setOpen(false)}
         >
           <div
-            className="relative w-full max-w-[34rem] overflow-hidden rounded-[1.6rem] border border-[rgba(248,241,232,0.12)] bg-[rgba(20,15,13,0.96)] shadow-[0_30px_80px_rgba(0,0,0,0.36)]"
+            className="relative w-full max-w-[34rem] overflow-hidden rounded-[1.6rem] border border-[rgba(248,241,232,0.12)] bg-[rgba(20,15,13,0.96)] shadow-[0_30px_80px_rgba(0,0,0,0.36)] [animation:lightbox-in_240ms_cubic-bezier(0.22,1,0.36,1)_forwards]"
             onClick={(event) => event.stopPropagation()}
           >
             <button
