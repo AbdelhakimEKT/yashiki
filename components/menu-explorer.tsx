@@ -95,6 +95,8 @@ export default function MenuExplorer({ sections }: MenuExplorerProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
   const categoryNavRef = useRef<HTMLElement | null>(null);
+  const pendingSectionIdRef = useRef<string | null>(null);
+  const pendingSectionTimerRef = useRef<number | null>(null);
   const paramsString = searchParams.toString();
   const filtersFromUrl = normalizeFilters(
     searchParams.get("filters") ?? searchParams.get("filter"),
@@ -161,12 +163,23 @@ export default function MenuExplorer({ sections }: MenuExplorerProps) {
     .filter((section) => section.items.length > 0);
 
   const sectionIds = filteredSections.map((section) => toSectionId(section.title));
-  sectionIdsRef.current = sectionIds;
+
+  useEffect(() => {
+    sectionIdsRef.current = sectionIds;
+  }, [sectionIds]);
 
   const currentSectionId =
     activeSectionId && sectionIds.includes(activeSectionId)
       ? activeSectionId
       : sectionIds[0] ?? null;
+
+  useEffect(() => {
+    return () => {
+      if (pendingSectionTimerRef.current) {
+        window.clearTimeout(pendingSectionTimerRef.current);
+      }
+    };
+  }, []);
 
   useEffect(() => {
     if (!currentSectionId) {
@@ -211,6 +224,25 @@ export default function MenuExplorer({ sections }: MenuExplorerProps) {
     const detect = () => {
       const ids = sectionIdsRef.current;
       if (ids.length === 0) return;
+
+      const pendingSectionId = pendingSectionIdRef.current;
+      if (pendingSectionId) {
+        const pendingSection = document.getElementById(pendingSectionId);
+        const threshold = window.innerHeight * 0.3;
+
+        if (pendingSection) {
+          const pendingTop = pendingSection.getBoundingClientRect().top;
+
+          if (pendingTop <= threshold + 8) {
+            pendingSectionIdRef.current = null;
+          } else {
+            setActiveSectionId(pendingSectionId);
+            return;
+          }
+        } else {
+          pendingSectionIdRef.current = null;
+        }
+      }
 
       // Use 30% from top of viewport as the detection threshold.
       // The last section whose top edge is above that line is "active".
@@ -362,6 +394,39 @@ export default function MenuExplorer({ sections }: MenuExplorerProps) {
                 ? "border-[rgba(161,45,39,0.2)] bg-[var(--accent)] text-[var(--paper-soft)] shadow-[0_2px_8px_rgba(161,45,39,0.22)]"
                 : "border-[var(--line)] bg-[rgba(248,241,232,0.58)] hover:border-[rgba(24,17,13,0.24)] hover:bg-[rgba(248,241,232,0.88)]"
             }`}
+            onClick={(event) => {
+              event.preventDefault();
+
+              const nextSectionId = toSectionId(section.title);
+              const targetSection = document.getElementById(nextSectionId);
+              if (!targetSection) {
+                return;
+              }
+
+              if (pendingSectionTimerRef.current) {
+                window.clearTimeout(pendingSectionTimerRef.current);
+              }
+
+              pendingSectionIdRef.current = nextSectionId;
+              setActiveSectionId(nextSectionId);
+
+              const prefersReducedMotion =
+                window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches;
+              const targetTop =
+                window.scrollY + targetSection.getBoundingClientRect().top - 112;
+
+              window.scrollTo({
+                top: Math.max(0, targetTop),
+                behavior: prefersReducedMotion ? "auto" : "smooth",
+              });
+
+              window.history.replaceState(null, "", `#${nextSectionId}`);
+
+              pendingSectionTimerRef.current = window.setTimeout(() => {
+                pendingSectionIdRef.current = null;
+                pendingSectionTimerRef.current = null;
+              }, 1200);
+            }}
           >
             {String(index + 1).padStart(2, "0")} · {section.title}
           </a>

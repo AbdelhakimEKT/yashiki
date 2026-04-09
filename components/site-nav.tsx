@@ -23,10 +23,6 @@ export default function SiteNav({ light = false }: SiteNavProps) {
   const wrapperRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    setOpen(false);
-  }, [pathname]);
-
-  useEffect(() => {
     if (!open) return;
 
     const handleClickOutside = (event: MouseEvent) => {
