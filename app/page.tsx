@@ -323,7 +323,7 @@ export default function Home() {
                     </p>
                     <p className="mt-3 max-w-[16rem] text-sm leading-7 text-[rgba(248,241,232,0.88)]">
                       Le Japon dans les matières et le geste. La France dans la
-                      clarté du parcours.
+                      le rythme et l’accueil.
                     </p>
                   </div>
                 </div>
@@ -459,8 +459,8 @@ export default function Home() {
               Les réponses qu’on cherche souvent avant de réserver.
             </h2>
             <p className="mt-6 max-w-md text-[15px] leading-8 text-[var(--ink-muted)]">
-              Des réponses simples, comme au téléphone: courtes, directes,
-              lisibles sur mobile.
+              Des réponses simples, comme on te les dirait au comptoir: courtes,
+              directes, sans détour.
             </p>
           </Reveal>
 

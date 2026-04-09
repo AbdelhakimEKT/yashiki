@@ -57,9 +57,8 @@ export default function ReservationPage() {
                   Une table, un horaire, et c’est réglé.
                 </h1>
                 <p className="mt-6 max-w-2xl text-[16px] leading-8 text-[var(--ink-muted)]">
-                  Téléphone, email, horaires, FAQ et carte interactive sont au
-                  même endroit. Le parcours est conçu pour décider vite, surtout
-                  sur mobile.
+                  Téléphone, email, horaires, FAQ et plan sont au même endroit.
+                  Tu choisis le canal, on bloque la table.
                 </p>
 
                 <div className="mt-8 flex flex-col gap-3 sm:flex-row">
@@ -198,8 +197,8 @@ export default function ReservationPage() {
               Les réponses utiles avant d’arriver.
             </h2>
             <p className="mt-6 max-w-md text-[15px] leading-8 text-[var(--ink-muted)]">
-              L’objectif est simple: limiter les doutes, alléger la charge
-              mentale et éviter les allers-retours avant le service.
+              Les questions qui reviennent avant le service. Les réponses sont
+              là, sans roman.
             </p>
           </Reveal>
 

@@ -44,8 +44,8 @@ export default function SiteNav({ light = false }: SiteNavProps) {
         onClick={() => setOpen((value) => !value)}
       >
         <span>Menu</span>
-        <span className="flex h-6 w-6 items-center justify-center rounded-full border border-current/20 text-[10px]">
-          {open ? "−" : "+"}
+        <span className="grid h-6 w-6 place-items-center rounded-full border border-current/20 text-[11px] leading-none">
+          <span className="relative top-[-0.5px]">{open ? "−" : "+"}</span>
         </span>
       </button>
 

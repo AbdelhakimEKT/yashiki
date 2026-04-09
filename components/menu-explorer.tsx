@@ -4,6 +4,7 @@ import {
   startTransition,
   useDeferredValue,
   useEffect,
+  useRef,
   useState,
 } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
@@ -93,6 +94,7 @@ export default function MenuExplorer({ sections }: MenuExplorerProps) {
   const pathname = usePathname();
   const router = useRouter();
   const searchParams = useSearchParams();
+  const categoryNavRef = useRef<HTMLElement | null>(null);
   const paramsString = searchParams.toString();
   const filtersFromUrl = normalizeFilters(
     searchParams.get("filters") ?? searchParams.get("filter"),
@@ -162,6 +164,45 @@ export default function MenuExplorer({ sections }: MenuExplorerProps) {
     activeSectionId && sectionIds.includes(activeSectionId)
       ? activeSectionId
       : sectionIds[0] ?? null;
+
+  useEffect(() => {
+    if (!currentSectionId) {
+      return;
+    }
+
+    const nav = categoryNavRef.current;
+    if (!nav) {
+      return;
+    }
+
+    const activeLink = nav.querySelector<HTMLElement>(
+      `[data-section-link="${currentSectionId}"]`,
+    );
+    if (!activeLink) {
+      return;
+    }
+
+    const navRect = nav.getBoundingClientRect();
+    const linkRect = activeLink.getBoundingClientRect();
+    const padding = 12;
+    const alreadyVisible =
+      linkRect.left >= navRect.left + padding &&
+      linkRect.right <= navRect.right - padding;
+
+    if (alreadyVisible) {
+      return;
+    }
+
+    const prefersReducedMotion =
+      typeof window !== "undefined" &&
+      window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches;
+
+    activeLink.scrollIntoView({
+      behavior: prefersReducedMotion ? "auto" : "smooth",
+      block: "nearest",
+      inline: "center",
+    });
+  }, [currentSectionId]);
 
   useEffect(() => {
     if (sectionIds.length === 0) {
@@ -310,11 +351,13 @@ export default function MenuExplorer({ sections }: MenuExplorerProps) {
       <nav
         aria-label="Sections de la carte"
         className="sticky top-3 z-20 flex min-w-0 max-w-full gap-3 overflow-x-auto overflow-y-hidden rounded-[1.35rem] bg-[rgba(248,241,232,0.78)] px-2 py-2 text-[11px] uppercase tracking-[0.26em] backdrop-blur-xl [overscroll-behavior-x:contain] [scrollbar-width:none] [-ms-overflow-style:none] sm:static sm:bg-transparent sm:px-0 sm:py-0 sm:backdrop-blur-none"
+        ref={categoryNavRef}
       >
         {filteredSections.map((section, index) => (
           <a
             key={section.title}
             href={`#${toSectionId(section.title)}`}
+            data-section-link={toSectionId(section.title)}
             aria-current={
               currentSectionId === toSectionId(section.title) ? "true" : undefined
             }
