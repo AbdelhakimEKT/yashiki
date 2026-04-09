@@ -41,7 +41,10 @@ const reservationChannels = [
 
 export default function ReservationPage() {
   return (
-    <main id="main-content" className="min-h-screen bg-[var(--paper-soft)] text-[var(--ink)]">
+    <main
+      id="main-content"
+      className="min-h-screen w-full max-w-full overflow-x-clip bg-[var(--paper-soft)] text-[var(--ink)]"
+    >
       <SiteHeader />
 
       <section className="page-shell py-12 lg:py-16">

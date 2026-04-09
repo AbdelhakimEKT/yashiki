@@ -82,7 +82,7 @@ export default function SiteNav({ light = false }: SiteNavProps) {
       {open ? (
         <div
           id="site-mobile-nav"
-          className={`absolute right-0 top-[calc(100%+12px)] z-40 min-w-[18rem] rounded-[1.5rem] p-3 shadow-[0_24px_60px_rgba(26,20,16,0.18)] backdrop-blur-xl md:hidden ${mobileShell}`}
+          className={`absolute right-0 top-[calc(100%+12px)] z-40 w-[min(18rem,calc(100vw-2rem))] rounded-[1.5rem] p-3 shadow-[0_24px_60px_rgba(26,20,16,0.18)] backdrop-blur-xl md:hidden ${mobileShell}`}
         >
           <p className="px-3 pb-2 text-[10px] uppercase tracking-[0.32em] text-current/60">
             Navigation

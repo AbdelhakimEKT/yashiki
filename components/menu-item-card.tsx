@@ -1,5 +1,4 @@
-import Image from "next/image";
-
+import MenuItemLightbox from "@/components/menu-item-lightbox";
 import type { MenuItem } from "@/data/menu";
 
 type MenuItemCardProps = {
@@ -64,24 +63,16 @@ export default function MenuItemCard({ item, index }: MenuItemCardProps) {
       </div>
 
       {item.image ? (
-        <div
+        <MenuItemLightbox
+          image={item.image}
+          alt={item.imageAlt ?? item.name}
+          caption={item.imageCaption ?? "Aperçu du plat"}
           className={`relative overflow-hidden rounded-[1.5rem] border border-[var(--line)] bg-[rgba(248,241,232,0.62)] ${
             reverseLayout ? "lg:order-1" : "lg:order-2"
           }`}
-        >
-          <Image
-            src={item.image}
-            alt={item.imageAlt ?? item.name}
-            className="aspect-square w-full object-cover transition duration-500 group-hover:scale-[1.03] lg:aspect-[4/3]"
-            sizes="(min-width: 1024px) 16rem, 5.75rem"
-          />
-          <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(20,15,13,0.02)_0%,rgba(20,15,13,0.08)_45%,rgba(20,15,13,0.68)_100%)]" />
-          <div className="absolute inset-x-0 bottom-0 hidden p-4 sm:block">
-            <p className="text-[10px] uppercase tracking-[0.22em] text-[rgba(248,241,232,0.74)]">
-              {item.imageCaption ?? "Aperçu du plat"}
-            </p>
-          </div>
-        </div>
+          imageClassName="aspect-square w-full object-cover transition duration-500 group-hover:scale-[1.03] lg:aspect-[4/3]"
+          sizes="(min-width: 1024px) 16rem, 5.75rem"
+        />
       ) : null}
     </article>
   );

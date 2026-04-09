@@ -29,12 +29,17 @@ html {
   scroll-behavior: smooth;
   scroll-padding-top: 112px;
   background: var(--paper-soft);
+  width: 100%;
+  max-width: 100%;
+  overflow-x: clip;
 }
 
 body {
   margin: 0;
   min-height: 100vh;
-  overflow-x: hidden;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: clip;
   color: var(--ink);
   background:
     radial-gradient(circle at top left, rgba(207, 172, 114, 0.12), transparent 28%),
@@ -234,11 +239,13 @@ body::before {
     @apply inline-flex items-center justify-center rounded-full border px-6 py-3 text-[11px] uppercase tracking-[0.28em] transition duration-300;
     border-color: var(--line);
     background: rgba(248, 241, 232, 0.44);
+    color: var(--ink) !important;
   }
 
   .cta-secondary:hover {
     background: rgba(248, 241, 232, 0.72);
     border-color: rgba(24, 17, 13, 0.22);
+    color: var(--ink) !important;
     transform: translate3d(0, -1px, 0);
   }
 
@@ -314,6 +321,7 @@ body::before {
     @apply rounded-full border px-4 py-2 text-[11px] uppercase tracking-[0.26em] transition duration-300;
     border-color: var(--line);
     background: rgba(248, 241, 232, 0.6);
+    white-space: nowrap;
   }
 
   .menu-filter:hover {
@@ -458,13 +466,14 @@ body::before {
   .mobile-sticky-secondary {
     flex: 0 0 auto;
     border: 1px solid rgba(248, 241, 232, 0.12);
-    color: var(--paper-soft);
+    background: rgba(248, 241, 232, 0.08);
+    color: var(--paper-soft) !important;
     min-width: 5.5rem;
     min-height: 2.75rem;
   }
 
   .mobile-sticky-secondary:hover {
-    background: rgba(248, 241, 232, 0.08);
+    background: rgba(248, 241, 232, 0.14);
     transform: translate3d(0, -1px, 0);
   }
 

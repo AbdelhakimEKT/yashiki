@@ -41,7 +41,10 @@ const spaceNotes = [
 
 export default function MaisonPage() {
   return (
-    <main id="main-content" className="min-h-screen bg-[var(--paper-soft)] text-[var(--ink)]">
+    <main
+      id="main-content"
+      className="min-h-screen w-full max-w-full overflow-x-clip bg-[var(--paper-soft)] text-[var(--ink)]"
+    >
       <section
         className="relative isolate min-h-[92svh] overflow-hidden bg-[var(--night)]"
         style={{ color: "rgb(248, 241, 232)" }}

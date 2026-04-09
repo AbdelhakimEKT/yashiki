@@ -39,7 +39,10 @@ function MenuExplorerFallback() {
 
 export default function MenuPage() {
   return (
-    <main id="main-content" className="min-h-screen bg-[var(--paper-soft)] text-[var(--ink)]">
+    <main
+      id="main-content"
+      className="min-h-screen w-full max-w-full overflow-x-clip bg-[var(--paper-soft)] text-[var(--ink)]"
+    >
       <section
         className="relative isolate min-h-[88svh] overflow-hidden bg-[var(--night)]"
         style={{ color: "rgb(248, 241, 232)" }}

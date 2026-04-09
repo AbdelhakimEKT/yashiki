@@ -204,8 +204,8 @@ export default function MenuExplorer({ sections }: MenuExplorerProps) {
   const hasActiveControls = activeFilters.length > 0 || query.trim().length > 0;
 
   return (
-    <div className="grid gap-10">
-      <div className="soft-panel p-5 sm:p-6 lg:p-8">
+    <div className="grid min-w-0 gap-10">
+      <div className="soft-panel min-w-0 p-5 sm:p-6 lg:p-8">
         <div className="grid gap-6 lg:grid-cols-[0.62fr_0.38fr] lg:items-end">
           <div>
             <p className="eyebrow">Explorer la carte</p>
@@ -242,7 +242,7 @@ export default function MenuExplorer({ sections }: MenuExplorerProps) {
           </label>
         </div>
 
-        <div className="-mx-1 mt-6 flex gap-2 overflow-x-auto px-1 pb-1 sm:mx-0 sm:flex-wrap sm:overflow-visible sm:px-0">
+        <div className="mt-6 flex min-w-0 gap-2 overflow-x-auto overflow-y-hidden pb-1 [overscroll-behavior-x:contain] [scrollbar-width:none] [-ms-overflow-style:none] sm:flex-wrap sm:overflow-visible">
           {filters.map((filter) => {
             if (filter === "Tout") {
               return null;
@@ -309,7 +309,7 @@ export default function MenuExplorer({ sections }: MenuExplorerProps) {
 
       <nav
         aria-label="Sections de la carte"
-        className="sticky top-3 z-20 -mx-2 flex gap-3 overflow-x-auto rounded-[1.35rem] bg-[rgba(248,241,232,0.78)] px-2 py-2 text-[11px] uppercase tracking-[0.26em] backdrop-blur-xl sm:static sm:mx-0 sm:bg-transparent sm:px-0 sm:py-0 sm:backdrop-blur-none"
+        className="sticky top-3 z-20 flex min-w-0 max-w-full gap-3 overflow-x-auto overflow-y-hidden rounded-[1.35rem] bg-[rgba(248,241,232,0.78)] px-2 py-2 text-[11px] uppercase tracking-[0.26em] backdrop-blur-xl [overscroll-behavior-x:contain] [scrollbar-width:none] [-ms-overflow-style:none] sm:static sm:bg-transparent sm:px-0 sm:py-0 sm:backdrop-blur-none"
       >
         {filteredSections.map((section, index) => (
           <a
@@ -318,7 +318,7 @@ export default function MenuExplorer({ sections }: MenuExplorerProps) {
             aria-current={
               currentSectionId === toSectionId(section.title) ? "true" : undefined
             }
-            className={`shrink-0 rounded-full border px-4 py-3 transition duration-300 ${
+            className={`shrink-0 whitespace-nowrap rounded-full border px-4 py-3 transition duration-300 ${
               currentSectionId === toSectionId(section.title)
                 ? "border-[rgba(161,45,39,0.16)] bg-[rgba(161,45,39,0.08)] text-[var(--accent-deep)] shadow-[inset_0_0_0_1px_rgba(161,45,39,0.04)]"
                 : "border-[var(--line)] bg-[rgba(248,241,232,0.58)] hover:border-[rgba(24,17,13,0.24)] hover:bg-[rgba(248,241,232,0.88)]"
@@ -340,7 +340,7 @@ export default function MenuExplorer({ sections }: MenuExplorerProps) {
         </div>
       ) : null}
 
-      <div className="grid gap-14">
+      <div className="grid min-w-0 gap-14">
         {filteredSections.map((section, index) => (
           <section
             key={section.title}
@@ -356,8 +356,8 @@ export default function MenuExplorer({ sections }: MenuExplorerProps) {
               const summary = getSectionSummary(section);
 
               return (
-                <div className="grid gap-6 lg:grid-cols-[0.42fr_0.58fr] lg:gap-16">
-                  <div className="lg:sticky lg:top-28 lg:self-start">
+                <div className="grid min-w-0 gap-6 lg:grid-cols-[0.42fr_0.58fr] lg:gap-16">
+                  <div className="min-w-0 lg:sticky lg:top-28 lg:self-start">
                     <div
                       className={`max-w-md transition duration-300 ${
                         currentSectionId === toSectionId(section.title)
@@ -420,8 +420,8 @@ export default function MenuExplorer({ sections }: MenuExplorerProps) {
                     </div>
                   </div>
 
-                  <div>
-                    <div className="mb-4 flex flex-wrap items-center gap-2 text-[10px] uppercase tracking-[0.24em] text-[var(--ink-muted)]">
+                  <div className="min-w-0">
+                    <div className="mb-4 flex min-w-0 flex-wrap items-center gap-2 text-[10px] uppercase tracking-[0.24em] text-[var(--ink-muted)]">
                       <span>{section.title}</span>
                       <span className="h-px flex-1 bg-[var(--line)]" />
                       <span>{summary.total} plats</span>

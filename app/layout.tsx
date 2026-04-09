@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 
 import BackToTopButton from "@/components/back-to-top-button";
 import RestaurantSchema from "@/components/restaurant-schema";
@@ -57,6 +57,12 @@ export const metadata: Metadata = {
       "Restaurant japonais contemporain à Paris. Bouillons lents, sushi minute, comptoir et réservation simple.",
     images: [socialImage],
   },
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
 };
 
 export default function RootLayout({
