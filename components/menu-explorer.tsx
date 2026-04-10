@@ -176,6 +176,11 @@ export default function MenuExplorer({ sections }: MenuExplorerProps) {
       return;
     }
 
+    const isDesktop = window.matchMedia?.("(min-width: 1024px)")?.matches;
+    if (!isDesktop) {
+      return;
+    }
+
     const nav = categoryNavRef.current;
     if (!nav) {
       return;
@@ -349,7 +354,7 @@ export default function MenuExplorer({ sections }: MenuExplorerProps) {
 
       <nav
         aria-label="Sections de la carte"
-        className="sticky top-3 z-20 flex min-w-0 max-w-full gap-2 overflow-x-auto overflow-y-hidden rounded-[1.4rem] bg-[rgba(248,241,232,0.88)] px-2 py-2 text-[11px] uppercase tracking-[0.26em] shadow-[0_2px_16px_rgba(24,17,13,0.07)] backdrop-blur-xl [overscroll-behavior-x:contain] [scroll-snap-type:x_proximity] [scrollbar-width:none] [touch-action:pan-x] [-ms-overflow-style:none] lg:static lg:bg-transparent lg:px-0 lg:py-0 lg:shadow-none lg:backdrop-blur-none"
+        className="hidden min-w-0 max-w-full gap-2 overflow-x-auto overflow-y-hidden rounded-[1.4rem] bg-[rgba(248,241,232,0.88)] px-2 py-2 text-[11px] uppercase tracking-[0.26em] shadow-[0_2px_16px_rgba(24,17,13,0.07)] backdrop-blur-xl [overscroll-behavior-x:contain] [scroll-snap-type:x_proximity] [scrollbar-width:none] [touch-action:pan-x] [-ms-overflow-style:none] lg:sticky lg:top-3 lg:flex lg:bg-transparent lg:px-0 lg:py-0 lg:shadow-none lg:backdrop-blur-none"
         ref={categoryNavRef}
       >
         {filteredSections.map((section, index) => (
